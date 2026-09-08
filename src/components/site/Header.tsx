@@ -12,6 +12,7 @@ const NAV = [
 ] as const;
 
 export function Header() {
+  const cart = useCart();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
