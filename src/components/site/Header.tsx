@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
-import { Menu, Search, ShoppingBag, User, X } from "lucide-react";
+import { Menu, Search, ShoppingBag, X } from "lucide-react";
 import { useEffect, useState } from "react";
+import { useCart } from "@/lib/cart";
 
 const NAV = [
   { label: "Shop", to: "/shop" },
@@ -60,20 +61,19 @@ export function Header() {
             >
               <Search className="size-5" strokeWidth={1.6} />
             </button>
-            <Link
-              to="/kontakt"
-              aria-label="Konto"
-              className="hidden size-11 place-items-center rounded-md text-foreground/80 transition-colors hover:bg-soft-blue hover:text-navy sm:grid"
-            >
-              <User className="size-5" strokeWidth={1.6} />
-            </Link>
-            <Link
-              to="/warenkorb"
-              aria-label="Warenkorb"
-              className="grid size-11 place-items-center rounded-md text-foreground/80 transition-colors hover:bg-soft-blue hover:text-navy"
+            <button
+              type="button"
+              onClick={() => cart.setOpen(true)}
+              aria-label="Warenkorb öffnen"
+              className="relative grid size-11 place-items-center rounded-md text-foreground/80 transition-colors hover:bg-soft-blue hover:text-navy"
             >
               <ShoppingBag className="size-5" strokeWidth={1.6} />
-            </Link>
+              {cart.count > 0 ? (
+                <span className="absolute right-1 top-1 grid min-w-[18px] place-items-center rounded-full bg-navy px-1 text-[10px] font-bold leading-[18px] text-primary-foreground">
+                  {cart.count}
+                </span>
+              ) : null}
+            </button>
             <button
               type="button"
               aria-label={open ? "Menü schließen" : "Menü öffnen"}
