@@ -1,49 +1,46 @@
 import { Link } from "@tanstack/react-router";
-import { ArrowRight } from "lucide-react";
+import { ArrowDown, ArrowRight } from "lucide-react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 import heroVideo from "@/assets/reklam-videosu.mp4.asset.json";
 
 export function Hero() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+
+    let frame = 0;
+    const update = () => {
+      frame = 0;
+      const rect = section.getBoundingClientRect();
+      const available = Math.max(section.offsetHeight - window.innerHeight, 1);
+      setProgress(Math.min(Math.max(-rect.top / available, 0), 1));
+    };
+    const onScroll = () => {
+      if (frame) return;
+      frame = window.requestAnimationFrame(update);
+    };
+
+    update();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+      if (frame) window.cancelAnimationFrame(frame);
+    };
+  }, []);
+
+  const progressStyle = { "--hero-progress": progress } as CSSProperties;
+
   return (
-    <section className="bg-background">
-      <div className="container-alkorin grid items-center gap-10 py-14 lg:grid-cols-[40fr_60fr] lg:gap-16 lg:py-20">
-        <div className="fade-up max-w-xl">
-          <p className="eyebrow">ALKORIN® Original</p>
-          <h1 className="mt-5 text-[2.5rem] font-extrabold leading-[1.08] text-navy sm:text-5xl lg:text-[3.5rem]">
-            Bereit für morgen.
-            <br />
-            Gemacht für heute.
-          </h1>
-          <p className="mt-6 max-w-md text-lg leading-relaxed text-muted-foreground">
-            Die bewährte ALKORIN® Rezeptur verbindet ausgewählte Vitamine, Mineralstoffe und Cholin
-            in einer unkomplizierten Routine – für Menschen, die bewusst durch ihren Alltag gehen.
-          </p>
-
-          <div className="mt-9 flex flex-wrap items-center gap-4">
-            <Link
-              to="/shop"
-              className="inline-flex h-13 items-center rounded-[11px] bg-navy px-7 py-4 text-sm font-semibold text-primary-foreground transition-all duration-300 hover:bg-navy/90 active:scale-[0.98]"
-            >
-              Produkte entdecken
-            </Link>
-            <Link
-              to="/alkorin"
-              className="group inline-flex items-center gap-2 px-1 py-4 text-sm font-semibold text-navy"
-            >
-              Alkorin kennenlernen
-              <ArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-1" />
-            </Link>
-          </div>
-
-          <ul className="mt-10 flex flex-wrap gap-x-8 gap-y-2 text-sm text-muted-foreground">
-            <li>Seit über 10 Jahren</li>
-            <li>Praktisch dosierbar</li>
-            <li>Versand aus Deutschland</li>
-          </ul>
-        </div>
-
-        <div className="fade-up relative overflow-hidden rounded-[22px] bg-soft-blue shadow-[0_1px_2px_oklch(0.28_0.038_242.3/0.04),0_24px_60px_oklch(0.28_0.038_242.3/0.10)]">
+    <section ref={sectionRef} className="hero-expand relative h-[150svh] bg-navy" style={progressStyle}>
+      <div className="sticky top-0 flex h-[100svh] items-center justify-center overflow-hidden bg-navy px-4 py-5 sm:px-6 sm:py-7">
+        <div className="hero-expand__media relative overflow-hidden rounded-[18px] shadow-[0_28px_80px_oklch(0.12_0.04_255/0.38)]">
           <video
-            className="block h-[340px] w-full object-cover object-center sm:h-[440px] lg:h-[560px]"
+            className="absolute inset-0 size-full object-cover object-center"
             src={heroVideo.url}
             autoPlay
             muted
@@ -52,6 +49,54 @@ export function Hero() {
             preload="metadata"
             aria-label="ALKORIN® Produkt- und Lifestyle-Video"
           />
+          <div className="hero-expand__veil absolute inset-0 bg-navy" />
+          <div className="absolute inset-x-0 top-0 h-1 bg-health-blue">
+            <span className="block h-full w-16 bg-health-yellow" />
+          </div>
+
+          <div className="relative z-10 flex h-full flex-col items-center justify-center px-5 text-center sm:px-10">
+            <div className="hero-expand__copy max-w-4xl">
+              <p className="mb-5 inline-flex items-center gap-3 rounded-full border border-primary-foreground/25 bg-navy/35 px-4 py-2 text-[11px] font-bold uppercase tracking-[0.16em] text-primary-foreground backdrop-blur-sm">
+                <span className="size-2 rounded-full bg-health-yellow" />
+                ALKORIN® Original
+              </p>
+              <h1 className="font-display text-[clamp(2.7rem,7vw,6.75rem)] font-extrabold leading-[0.95] tracking-normal text-primary-foreground">
+                Bereit für morgen.
+                <span className="mt-1 block text-health-green">Gemacht für heute.</span>
+              </h1>
+              <p className="mx-auto mt-6 max-w-2xl text-sm leading-relaxed text-primary-foreground/80 sm:text-lg">
+                Ausgewählte Vitamine, Mineralstoffe und Cholin – als unkomplizierte Routine für
+                Menschen, die bewusst durch ihren Alltag gehen.
+              </p>
+
+              <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+                <Link
+                  to="/shop"
+                  className="inline-flex min-h-12 w-full items-center justify-center rounded-[11px] bg-primary-foreground px-7 text-sm font-bold text-navy transition-colors hover:bg-soft-green sm:w-auto"
+                >
+                  Produkte entdecken
+                </Link>
+                <Link
+                  to="/alkorin"
+                  className="group inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-[11px] border border-primary-foreground/35 px-7 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary-foreground/10 sm:w-auto"
+                >
+                  Alkorin kennenlernen
+                  <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
+                </Link>
+              </div>
+            </div>
+
+            <ul className="hero-expand__trust absolute inset-x-4 bottom-5 flex flex-wrap justify-center gap-x-6 gap-y-2 text-[11px] font-semibold text-primary-foreground/70 sm:bottom-7 sm:text-xs">
+              <li>Seit über 10 Jahren</li>
+              <li>Praktisch dosierbar</li>
+              <li>Versand aus Deutschland</li>
+            </ul>
+          </div>
+        </div>
+
+        <div className="hero-expand__cue pointer-events-none absolute bottom-7 left-1/2 z-20 flex -translate-x-1/2 flex-col items-center gap-2 text-primary-foreground/70">
+          <span className="text-[10px] font-bold uppercase tracking-[0.18em]">Scrollen zum Entdecken</span>
+          <ArrowDown className="size-4 animate-bounce" />
         </div>
       </div>
     </section>
