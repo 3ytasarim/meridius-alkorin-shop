@@ -5,8 +5,9 @@ const COLUMNS = [
     title: "Shop",
     links: [
       { label: "Alle Produkte", to: "/shop" },
-      { label: "ALKORIN® Original", to: "/produkt/$slug", params: { slug: "original-100g" } },
-      { label: "ALKORIN® Sachets", to: "/produkt/$slug", params: { slug: "sachets" } },
+      { label: "ALKORIN® Original", to: "/shop" },
+      { label: "ALKORIN® Sachets", to: "/shop" },
+
       { label: "Warenkorb", to: "/warenkorb" },
     ],
   },
@@ -90,10 +91,9 @@ export function Footer() {
                     <li key={link.label}>
                       <Link
                         to={link.to}
-                        // @ts-expect-error optional route params for dynamic product links
-                        params={"params" in link ? link.params : undefined}
                         className="text-sm text-primary-foreground/80 transition-colors hover:text-primary-foreground"
                       >
+
                         {link.label}
                       </Link>
                     </li>
