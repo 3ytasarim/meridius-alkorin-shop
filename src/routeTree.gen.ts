@@ -10,33 +10,206 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AgbRouteImport } from './routes/agb'
+import { Route as AlkorinRouteImport } from './routes/alkorin'
+import { Route as CheckoutRouteImport } from './routes/checkout'
+import { Route as DatenschutzRouteImport } from './routes/datenschutz'
+import { Route as FaqRouteImport } from './routes/faq'
+import { Route as ImpressumRouteImport } from './routes/impressum'
+import { Route as KontaktRouteImport } from './routes/kontakt'
+import { Route as ShopRouteImport } from './routes/shop'
+import { Route as UeberUnsRouteImport } from './routes/ueber-uns'
+import { Route as WarenkorbRouteImport } from './routes/warenkorb'
+import { Route as WiderrufRouteImport } from './routes/widerruf'
+import { Route as WissenRouteImport } from './routes/wissen'
+import { Route as ProduktSlugRouteImport } from './routes/produkt/$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AgbRoute = AgbRouteImport.update({
+  id: '/agb',
+  path: '/agb',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AlkorinRoute = AlkorinRouteImport.update({
+  id: '/alkorin',
+  path: '/alkorin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CheckoutRoute = CheckoutRouteImport.update({
+  id: '/checkout',
+  path: '/checkout',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DatenschutzRoute = DatenschutzRouteImport.update({
+  id: '/datenschutz',
+  path: '/datenschutz',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FaqRoute = FaqRouteImport.update({
+  id: '/faq',
+  path: '/faq',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ImpressumRoute = ImpressumRouteImport.update({
+  id: '/impressum',
+  path: '/impressum',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KontaktRoute = KontaktRouteImport.update({
+  id: '/kontakt',
+  path: '/kontakt',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ShopRoute = ShopRouteImport.update({
+  id: '/shop',
+  path: '/shop',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const UeberUnsRoute = UeberUnsRouteImport.update({
+  id: '/ueber-uns',
+  path: '/ueber-uns',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WarenkorbRoute = WarenkorbRouteImport.update({
+  id: '/warenkorb',
+  path: '/warenkorb',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WiderrufRoute = WiderrufRouteImport.update({
+  id: '/widerruf',
+  path: '/widerruf',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WissenRoute = WissenRouteImport.update({
+  id: '/wissen',
+  path: '/wissen',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProduktSlugRoute = ProduktSlugRouteImport.update({
+  id: '/produkt/$slug',
+  path: '/produkt/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/agb': typeof AgbRoute
+  '/alkorin': typeof AlkorinRoute
+  '/checkout': typeof CheckoutRoute
+  '/datenschutz': typeof DatenschutzRoute
+  '/faq': typeof FaqRoute
+  '/impressum': typeof ImpressumRoute
+  '/kontakt': typeof KontaktRoute
+  '/shop': typeof ShopRoute
+  '/ueber-uns': typeof UeberUnsRoute
+  '/warenkorb': typeof WarenkorbRoute
+  '/widerruf': typeof WiderrufRoute
+  '/wissen': typeof WissenRoute
+  '/produkt/$slug': typeof ProduktSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/agb': typeof AgbRoute
+  '/alkorin': typeof AlkorinRoute
+  '/checkout': typeof CheckoutRoute
+  '/datenschutz': typeof DatenschutzRoute
+  '/faq': typeof FaqRoute
+  '/impressum': typeof ImpressumRoute
+  '/kontakt': typeof KontaktRoute
+  '/shop': typeof ShopRoute
+  '/ueber-uns': typeof UeberUnsRoute
+  '/warenkorb': typeof WarenkorbRoute
+  '/widerruf': typeof WiderrufRoute
+  '/wissen': typeof WissenRoute
+  '/produkt/$slug': typeof ProduktSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/agb': typeof AgbRoute
+  '/alkorin': typeof AlkorinRoute
+  '/checkout': typeof CheckoutRoute
+  '/datenschutz': typeof DatenschutzRoute
+  '/faq': typeof FaqRoute
+  '/impressum': typeof ImpressumRoute
+  '/kontakt': typeof KontaktRoute
+  '/shop': typeof ShopRoute
+  '/ueber-uns': typeof UeberUnsRoute
+  '/warenkorb': typeof WarenkorbRoute
+  '/widerruf': typeof WiderrufRoute
+  '/wissen': typeof WissenRoute
+  '/produkt/$slug': typeof ProduktSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/agb'
+    | '/alkorin'
+    | '/checkout'
+    | '/datenschutz'
+    | '/faq'
+    | '/impressum'
+    | '/kontakt'
+    | '/shop'
+    | '/ueber-uns'
+    | '/warenkorb'
+    | '/widerruf'
+    | '/wissen'
+    | '/produkt/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/agb'
+    | '/alkorin'
+    | '/checkout'
+    | '/datenschutz'
+    | '/faq'
+    | '/impressum'
+    | '/kontakt'
+    | '/shop'
+    | '/ueber-uns'
+    | '/warenkorb'
+    | '/widerruf'
+    | '/wissen'
+    | '/produkt/$slug'
+  id:
+    | '__root__'
+    | '/'
+    | '/agb'
+    | '/alkorin'
+    | '/checkout'
+    | '/datenschutz'
+    | '/faq'
+    | '/impressum'
+    | '/kontakt'
+    | '/shop'
+    | '/ueber-uns'
+    | '/warenkorb'
+    | '/widerruf'
+    | '/wissen'
+    | '/produkt/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AgbRoute: typeof AgbRoute
+  AlkorinRoute: typeof AlkorinRoute
+  CheckoutRoute: typeof CheckoutRoute
+  DatenschutzRoute: typeof DatenschutzRoute
+  FaqRoute: typeof FaqRoute
+  ImpressumRoute: typeof ImpressumRoute
+  KontaktRoute: typeof KontaktRoute
+  ShopRoute: typeof ShopRoute
+  UeberUnsRoute: typeof UeberUnsRoute
+  WarenkorbRoute: typeof WarenkorbRoute
+  WiderrufRoute: typeof WiderrufRoute
+  WissenRoute: typeof WissenRoute
+  ProduktSlugRoute: typeof ProduktSlugRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +221,115 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/agb': {
+      id: '/agb'
+      path: '/agb'
+      fullPath: '/agb'
+      preLoaderRoute: typeof AgbRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/alkorin': {
+      id: '/alkorin'
+      path: '/alkorin'
+      fullPath: '/alkorin'
+      preLoaderRoute: typeof AlkorinRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/checkout': {
+      id: '/checkout'
+      path: '/checkout'
+      fullPath: '/checkout'
+      preLoaderRoute: typeof CheckoutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/datenschutz': {
+      id: '/datenschutz'
+      path: '/datenschutz'
+      fullPath: '/datenschutz'
+      preLoaderRoute: typeof DatenschutzRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/faq': {
+      id: '/faq'
+      path: '/faq'
+      fullPath: '/faq'
+      preLoaderRoute: typeof FaqRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/impressum': {
+      id: '/impressum'
+      path: '/impressum'
+      fullPath: '/impressum'
+      preLoaderRoute: typeof ImpressumRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/kontakt': {
+      id: '/kontakt'
+      path: '/kontakt'
+      fullPath: '/kontakt'
+      preLoaderRoute: typeof KontaktRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/shop': {
+      id: '/shop'
+      path: '/shop'
+      fullPath: '/shop'
+      preLoaderRoute: typeof ShopRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ueber-uns': {
+      id: '/ueber-uns'
+      path: '/ueber-uns'
+      fullPath: '/ueber-uns'
+      preLoaderRoute: typeof UeberUnsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/warenkorb': {
+      id: '/warenkorb'
+      path: '/warenkorb'
+      fullPath: '/warenkorb'
+      preLoaderRoute: typeof WarenkorbRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/widerruf': {
+      id: '/widerruf'
+      path: '/widerruf'
+      fullPath: '/widerruf'
+      preLoaderRoute: typeof WiderrufRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/wissen': {
+      id: '/wissen'
+      path: '/wissen'
+      fullPath: '/wissen'
+      preLoaderRoute: typeof WissenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/produkt/$slug': {
+      id: '/produkt/$slug'
+      path: '/produkt/$slug'
+      fullPath: '/produkt/$slug'
+      preLoaderRoute: typeof ProduktSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AgbRoute: AgbRoute,
+  AlkorinRoute: AlkorinRoute,
+  CheckoutRoute: CheckoutRoute,
+  DatenschutzRoute: DatenschutzRoute,
+  FaqRoute: FaqRoute,
+  ImpressumRoute: ImpressumRoute,
+  KontaktRoute: KontaktRoute,
+  ShopRoute: ShopRoute,
+  UeberUnsRoute: UeberUnsRoute,
+  WarenkorbRoute: WarenkorbRoute,
+  WiderrufRoute: WiderrufRoute,
+  WissenRoute: WissenRoute,
+  ProduktSlugRoute: ProduktSlugRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
