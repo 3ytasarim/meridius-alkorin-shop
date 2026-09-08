@@ -1,24 +1,48 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { Hero } from "@/components/home/Hero";
+import { TrustStrip } from "@/components/home/TrustStrip";
+import { Products } from "@/components/home/Products";
+import { WhyAlkorin } from "@/components/home/WhyAlkorin";
+import { Routine } from "@/components/home/Routine";
+import { Ingredients } from "@/components/home/Ingredients";
+import { LifestyleStory } from "@/components/home/LifestyleStory";
+import { Reviews } from "@/components/home/Reviews";
+import { Quality } from "@/components/home/Quality";
+import { Faq } from "@/components/home/Faq";
+import { FinalCta } from "@/components/home/FinalCta";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
+const TITLE = "ALKORIN® – Bewährte Rezeptur für deine Routine";
+const DESCRIPTION =
+  "ALKORIN® verbindet ausgewählte Vitamine, Mineralstoffe und Cholin in einer unkomplizierten Routine. Als Pulver oder Sachets – versandkostenfrei in Deutschland.";
+
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title: TITLE },
+      { name: "description", content: DESCRIPTION },
+      { property: "og:title", content: TITLE },
+      { property: "og:description", content: DESCRIPTION },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
+    <>
+      <Hero />
+      <TrustStrip />
+      <Products />
+      <WhyAlkorin />
+      <Routine />
+      <Ingredients />
+      <LifestyleStory />
+      <Reviews />
+      <Quality />
+      <Faq />
+      <FinalCta />
+    </>
   );
 }
