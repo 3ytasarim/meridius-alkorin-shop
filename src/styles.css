@@ -66,6 +66,7 @@
   --color-soft-blue: var(--soft-blue);
   --color-soft-green: var(--soft-green);
   --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Sora", "Manrope", ui-sans-serif, system-ui, sans-serif;
   --shadow-card: var(--shadow-soft);
 }
 
@@ -215,5 +216,55 @@
 
 @utility fade-up {
   animation: fade-up 600ms cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+
+.hero-expand__media {
+  width: calc(78vw + (18vw * var(--hero-progress)));
+  height: calc(65svh + (27svh * var(--hero-progress)));
+  transition: border-radius 180ms ease-out;
+  border-radius: calc(18px - (10px * var(--hero-progress)));
+}
+
+.hero-expand__veil {
+  opacity: calc(0.52 - (0.18 * var(--hero-progress)));
+}
+
+.hero-expand__copy {
+  transform: translateY(calc(-10px + (10px * var(--hero-progress))));
+  opacity: calc(0.92 + (0.08 * var(--hero-progress)));
+}
+
+.hero-expand__cue {
+  opacity: calc(1 - (var(--hero-progress) * 2));
+}
+
+.hero-expand__trust {
+  opacity: calc(0.7 + (0.3 * var(--hero-progress)));
+}
+
+@media (max-width: 767px) {
+  .hero-expand {
+    height: 125svh;
+  }
+
+  .hero-expand__media {
+    width: calc(92vw + (4vw * var(--hero-progress)));
+    height: calc(78svh + (14svh * var(--hero-progress)));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-expand {
+    height: 100svh;
+  }
+
+  .hero-expand__media {
+    width: 96vw;
+    height: 92svh;
+  }
+
+  .hero-expand__copy {
+    transform: none;
+  }
 }
 
