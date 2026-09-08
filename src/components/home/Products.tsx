@@ -1,40 +1,9 @@
-import { Link } from "@tanstack/react-router";
-import productOriginal from "@/assets/product-original.jpg";
-import productSachets from "@/assets/product-sachets.jpg";
-import productKapseln from "@/assets/product-kapseln.jpg";
-
-/**
- * CONTENT-PLATZHALTER: Produktnamen, Kurzbeschreibungen und Preise bitte durch
- * die realen Shop-Daten von alkorin.com ersetzen.
- */
-const PRODUCTS = [
-  {
-    name: "ALKORIN® Original",
-    descriptor: "Pulver, 100 g Dose – die klassische Rezeptur für zuhause.",
-    price: "29,90 €",
-    unit: "100 g",
-    badge: "Bestseller",
-    image: productOriginal,
-  },
-  {
-    name: "ALKORIN® Sachets",
-    descriptor: "Einzelportionen für unterwegs – ohne Abmessen, einfach dabei.",
-    price: "24,90 €",
-    unit: "10 Portionen",
-    badge: null,
-    image: productSachets,
-  },
-  {
-    name: "ALKORIN® Kapseln",
-    descriptor: "Die kompakte Alternative, wenn es besonders unkompliziert sein soll.",
-    price: "27,90 €",
-    unit: "60 Kapseln",
-    badge: null,
-    image: productKapseln,
-  },
-];
+import { PRODUCTS, formatPrice } from "@/lib/products";
+import { useCart } from "@/lib/cart";
 
 export function Products() {
+  const { add } = useCart();
+
   return (
     <section id="produkte" className="section-y">
       <div className="container-alkorin">
@@ -44,13 +13,14 @@ export function Products() {
             Finde ALKORIN, das zu dir passt.
           </h2>
           <p className="mt-5 text-lg leading-relaxed text-muted-foreground">
-            Dieselbe bewährte Rezeptur – in Formaten, die sich deinem Tag anpassen.
+            Dieselbe bewährte Rezeptur – in Formaten, die sich deinem Tag anpassen. Bezahlt wird
+            bequem bei der Lieferung.
           </p>
         </div>
 
         <ul className="mt-12 grid gap-6 sm:grid-cols-2 lg:mt-16 lg:grid-cols-3">
           {PRODUCTS.map((p) => (
-            <li key={p.name}>
+            <li key={p.slug}>
               <article className="group flex h-full flex-col overflow-hidden rounded-[20px] border border-border bg-card transition-shadow duration-300 hover:shadow-card">
                 <div className="relative bg-soft-green p-6">
                   {p.badge ? (
@@ -74,17 +44,18 @@ export function Products() {
                   </p>
                   <div className="mt-6 flex items-center justify-between gap-4">
                     <p className="text-base font-bold text-navy">
-                      {p.price}
+                      {formatPrice(p.priceCents)}
                       <span className="ml-2 text-xs font-medium text-muted-foreground">
                         {p.unit}
                       </span>
                     </p>
-                    <Link
-                      to="/shop"
+                    <button
+                      type="button"
+                      onClick={() => add(p)}
                       className="inline-flex h-11 items-center rounded-[10px] bg-navy px-5 text-sm font-semibold text-primary-foreground transition-all duration-300 hover:bg-navy/90 active:scale-[0.98]"
                     >
-                      Ansehen
-                    </Link>
+                      In den Warenkorb
+                    </button>
                   </div>
                 </div>
               </article>
