@@ -1,11 +1,11 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
-import heroProduct from "@/assets/hero-product.jpg";
+import heroVideo from "@/assets/reklam-videosu.mp4.asset.json";
 
 export function Hero() {
   return (
     <section className="bg-background">
-      <div className="container-alkorin grid items-center gap-10 py-14 lg:grid-cols-[42fr_58fr] lg:gap-16 lg:py-20">
+      <div className="container-alkorin grid items-center gap-10 py-14 lg:grid-cols-[40fr_60fr] lg:gap-16 lg:py-20">
         <div className="fade-up max-w-xl">
           <p className="eyebrow">ALKORIN® Original</p>
           <h1 className="mt-5 text-[2.5rem] font-extrabold leading-[1.08] text-navy sm:text-5xl lg:text-[3.5rem]">
@@ -41,13 +41,16 @@ export function Hero() {
           </ul>
         </div>
 
-        <div className="fade-up overflow-hidden rounded-[22px] bg-soft-blue">
-          <img
-            src={heroProduct}
-            alt="ALKORIN® Dose auf hellem Podest im Tageslicht"
-            width={1200}
-            height={1408}
-            className="h-[420px] w-full object-cover object-center sm:h-[520px] lg:h-[700px]"
+        <div className="fade-up relative overflow-hidden rounded-[22px] bg-soft-blue shadow-[0_1px_2px_oklch(0.28_0.038_242.3/0.04),0_24px_60px_oklch(0.28_0.038_242.3/0.10)]">
+          <video
+            className="block h-[340px] w-full object-cover object-center sm:h-[440px] lg:h-[560px]"
+            src={heroVideo.url}
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            aria-label="ALKORIN® Produkt- und Lifestyle-Video"
           />
         </div>
       </div>
