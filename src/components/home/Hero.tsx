@@ -8,7 +8,7 @@ export function Hero() {
       <div className="container-alkorin grid items-center gap-10 py-14 lg:grid-cols-[42fr_58fr] lg:gap-16 lg:py-20">
         <div className="fade-up max-w-xl">
           <p className="eyebrow">ALKORIN® Original</p>
-          <h1 className="mt-5 text-[2.5rem] font-extrabold leading-[1.08] text-navy sm:text-5xl lg:text-[4rem]">
+          <h1 className="mt-5 text-[2.5rem] font-extrabold leading-[1.08] text-navy sm:text-5xl lg:text-[3.5rem]">
             Bereit für morgen.
             <br />
             Gemacht für heute.
