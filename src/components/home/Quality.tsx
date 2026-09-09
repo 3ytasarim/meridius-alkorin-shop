@@ -1,4 +1,4 @@
-import expertise from "@/assets/expertise.jpg";
+import expertise from "@/assets/lifestyle/pharmacist.png.asset.json";
 
 export function Quality() {
   return (
@@ -33,11 +33,11 @@ export function Quality() {
         <div className="order-1 overflow-hidden rounded-[22px] lg:order-2">
           {/* MEDIEN-PLATZHALTER: hier später das echte Apotheker-/Expertenmotiv einsetzen. */}
           <img
-            src={expertise}
-            alt="Fachkundige Person in heller Apothekenumgebung"
+            src={expertise.url}
+            alt="Apothekerin empfiehlt ALKORIN® in einer hellen Apotheke"
             loading="lazy"
-            width={1200}
-            height={1312}
+            width={1448}
+            height={1086}
             className="h-[340px] w-full object-cover sm:h-[460px] lg:h-[620px]"
           />
         </div>

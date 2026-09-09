@@ -4,7 +4,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import ingredients from "@/assets/ingredients.jpg";
+import ingredients from "@/assets/lifestyle/benefits.png.asset.json";
 
 /**
  * CONTENT-PLATZHALTER: Inhaltsstoffe und Mengenangaben bitte anhand der realen
@@ -35,11 +35,11 @@ export function Ingredients() {
       <div className="container-alkorin grid gap-12 lg:grid-cols-2 lg:items-center lg:gap-20">
         <div className="overflow-hidden rounded-[22px]">
           <img
-            src={ingredients}
-            alt="Glas Wasser und ein Löffel Pulver auf heller Steinfläche"
+            src={ingredients.url}
+            alt="ALKORIN® Pulverbeutel mit Hinweis glutenfrei und laktosefrei"
             loading="lazy"
-            width={1200}
-            height={1312}
+            width={1672}
+            height={941}
             className="h-[320px] w-full object-cover sm:h-[460px] lg:h-[620px]"
           />
         </div>

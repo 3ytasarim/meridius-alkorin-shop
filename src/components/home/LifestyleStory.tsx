@@ -1,4 +1,4 @@
-import lifestyle from "@/assets/lifestyle-evening.jpg";
+import lifestyle from "@/assets/lifestyle/dusk-powder.png.asset.json";
 
 export function LifestyleStory() {
   return (
@@ -6,11 +6,11 @@ export function LifestyleStory() {
       <div className="container-alkorin">
         <div className="overflow-hidden rounded-[22px]">
           <img
-            src={lifestyle}
-            alt="Entspannter Abend mit Freunden bei Kerzenlicht"
+            src={lifestyle.url}
+            alt="Frau rührt ALKORIN® am frühen Abend in der Küche an"
             loading="lazy"
-            width={1408}
-            height={1008}
+            width={1448}
+            height={1086}
             className="h-[340px] w-full object-cover sm:h-[460px] lg:h-[560px]"
           />
         </div>

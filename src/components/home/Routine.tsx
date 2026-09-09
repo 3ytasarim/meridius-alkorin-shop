@@ -1,4 +1,4 @@
-import routine from "@/assets/routine.jpg";
+import routine from "@/assets/lifestyle/routine-day.png.asset.json";
 
 const STEPS = [
   {
@@ -32,11 +32,11 @@ export function Routine() {
         <div className="mt-12 grid gap-10 lg:mt-16 lg:grid-cols-[1fr_1fr] lg:items-center lg:gap-20">
           <div className="overflow-hidden rounded-[22px]">
             <img
-              src={routine}
-              alt="Ein Glas Wasser wird in einer hellen Küche umgerührt"
+              src={routine.url}
+              alt="Frau gießt Wasser in ein Glas mit ALKORIN® in einer hellen Küche"
               loading="lazy"
-              width={1408}
-              height={1008}
+              width={1448}
+              height={1086}
               className="h-[300px] w-full object-cover sm:h-[420px] lg:h-[540px]"
             />
           </div>
