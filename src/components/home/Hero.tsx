@@ -27,7 +27,7 @@ export function Hero() {
         <div className="max-w-3xl">
           <p className="inline-flex items-center gap-3 rounded-full border border-primary-foreground/25 bg-navy/35 px-4 py-2 text-[11px] font-bold uppercase tracking-[0.16em] text-primary-foreground backdrop-blur-sm">
             <span className="size-2 rounded-full bg-health-yellow" />
-            ALKORIN® Original
+            Dem nächsten Tag zuliebe · ALKORIN® Original
           </p>
           <h1 className="mt-6 font-display text-[clamp(2.6rem,6.4vw,5.5rem)] font-extrabold leading-[0.98] text-primary-foreground">
             Bereit für morgen.

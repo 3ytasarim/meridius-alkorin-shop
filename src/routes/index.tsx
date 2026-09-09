@@ -7,13 +7,14 @@ import { Routine } from "@/components/home/Routine";
 import { Ingredients } from "@/components/home/Ingredients";
 import { LifestyleStory } from "@/components/home/LifestyleStory";
 import { Reviews } from "@/components/home/Reviews";
+import { Moments } from "@/components/home/Moments";
 import { Quality } from "@/components/home/Quality";
 import { Faq } from "@/components/home/Faq";
 import { FinalCta } from "@/components/home/FinalCta";
 
-const TITLE = "ALKORIN® – Bewährte Rezeptur für deine Routine";
+const TITLE = "ALKORIN® – Bewährte Rezeptur für deine Abendroutine";
 const DESCRIPTION =
-  "ALKORIN® verbindet ausgewählte Vitamine, Mineralstoffe und Cholin in einer unkomplizierten Routine. Als Pulver oder Sachets – versandkostenfrei in Deutschland.";
+  "ALKORIN® verbindet ausgewählte Vitamine, Mineralstoffe und Cholin in einer unkomplizierten Routine. Als Pulver oder Sachets – Zahlung bei Lieferung, Versand aus Deutschland.";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -40,6 +41,7 @@ function Index() {
       <Ingredients />
       <LifestyleStory />
       <Reviews />
+      <Moments />
       <Quality />
       <Faq />
       <FinalCta />
