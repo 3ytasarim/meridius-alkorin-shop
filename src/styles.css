@@ -66,7 +66,7 @@
   --color-soft-blue: var(--soft-blue);
   --color-soft-green: var(--soft-green);
   --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Sora", "Manrope", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Manrope", ui-sans-serif, system-ui, sans-serif;
   --shadow-card: var(--shadow-soft);
 }
 
