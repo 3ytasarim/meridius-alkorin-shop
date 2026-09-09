@@ -1,4 +1,4 @@
-import lifestyle from "@/assets/lifestyle-evening.jpg";
+import eveningStir from "@/assets/lifestyle/evening-stir.png.asset.json";
 
 const BENEFITS = [
   {
@@ -14,7 +14,7 @@ const BENEFITS = [
   {
     no: "03",
     title: "Praktische Formate",
-    text: "Dose für zuhause, Sachets für unterwegs – du wählst, was zu deinem Tag passt.",
+    text: "Pulver für zuhause, Sachets für unterwegs – du wählst, was zu deinem Tag passt.",
   },
 ];
 
@@ -24,11 +24,11 @@ export function WhyAlkorin() {
       <div className="container-alkorin grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
         <div className="overflow-hidden rounded-[22px]">
           <img
-            src={lifestyle}
-            alt="Freunde an einem Abendtisch im warmen Licht"
+            src={eveningStir.url}
+            alt="Frau rührt ALKORIN® an einem lauten Abend in einem Glas Wasser"
             loading="lazy"
-            width={1408}
-            height={1008}
+            width={1448}
+            height={1086}
             className="h-[320px] w-full object-cover sm:h-[440px] lg:h-[600px]"
           />
         </div>

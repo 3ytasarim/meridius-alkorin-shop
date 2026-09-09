@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import lifestyle from "@/assets/routine.jpg";
+import lifestyle from "@/assets/lifestyle/bed-2.png.asset.json";
 
 export function FinalCta() {
   return (
@@ -7,11 +7,11 @@ export function FinalCta() {
       <div className="container-alkorin">
         <div className="grid overflow-hidden rounded-[22px] border border-border bg-card lg:grid-cols-2">
           <img
-            src={lifestyle}
-            alt="Ruhiger Moment in der Küche mit einem Glas Wasser"
+            src={lifestyle.url}
+            alt="Ruhiger Moment vor dem Schlafengehen mit einem Glas ALKORIN®"
             loading="lazy"
-            width={1408}
-            height={1008}
+            width={1448}
+            height={1086}
             className="h-[280px] w-full object-cover lg:h-full"
           />
           <div className="flex flex-col justify-center p-8 sm:p-12 lg:p-16">

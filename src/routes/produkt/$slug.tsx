@@ -200,6 +200,25 @@ function ProductPage() {
         </div>
       </section>
 
+      {product.video ? (
+        <section className="pb-4">
+          <div className="container-alkorin">
+            <div className="overflow-hidden rounded-[22px] bg-soft-green/50">
+              <video
+                src={product.video}
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="metadata"
+                aria-label={`${product.name} im Video`}
+                className="mx-auto aspect-square w-full max-w-[640px] object-cover"
+              />
+            </div>
+          </div>
+        </section>
+      ) : null}
+
       <section className="section-y bg-soft-green/60">
         <div className="container-alkorin">
           <h2 className="font-display text-2xl font-extrabold text-navy sm:text-3xl">
