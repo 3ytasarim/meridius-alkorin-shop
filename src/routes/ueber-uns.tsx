@@ -1,6 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import pharmacist from "@/assets/lifestyle/pharmacist.png.asset.json";
-import usage from "@/assets/lifestyle/usage-infographic.png.asset.json";
+import { FlaskConical, Info, Truck } from "lucide-react";
+import { InfoCard } from "@/components/ui/info-card";
+
+const pharmacist = "/pharmacist.png";
 
 export const Route = createFileRoute("/ueber-uns")({
   head: () => ({
@@ -24,9 +26,27 @@ export const Route = createFileRoute("/ueber-uns")({
 });
 
 const VALUES = [
-  { title: "Bewährte Rezeptur", text: "Eine über Jahre gewachsene Formel mit Cholin, Vitaminen und Mineralstoffen." },
-  { title: "Klare Informationen", text: "Sachliche Angaben statt übertriebener Versprechen." },
-  { title: "Aus Deutschland", text: "Versand aus Deutschland, Zahlung bequem bei der Lieferung." },
+  {
+    title: "Bewährte Rezeptur",
+    text: "Eine über Jahre gewachsene Formel mit Cholin, Vitaminen und Mineralstoffen.",
+    icon: FlaskConical,
+    accent: "var(--health-green)",
+    iconBg: "var(--soft-green)",
+  },
+  {
+    title: "Klare Informationen",
+    text: "Sachliche Angaben statt übertriebener Versprechen.",
+    icon: Info,
+    accent: "var(--health-blue)",
+    iconBg: "var(--soft-blue)",
+  },
+  {
+    title: "Aus Deutschland",
+    text: "Versand aus Deutschland, Zahlung bequem bei der Lieferung.",
+    icon: Truck,
+    accent: "var(--health-yellow)",
+    iconBg: "color-mix(in oklab, var(--health-yellow) 16%, white)",
+  },
 ];
 
 function UeberUnsPage() {
@@ -34,14 +54,28 @@ function UeberUnsPage() {
     <>
       <section className="section-y">
         <div className="container-alkorin grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
-          <div className="overflow-hidden rounded-[22px]">
+          <div className="relative">
+            <div className="overflow-hidden rounded-[22px]">
+              <img
+                src={pharmacist}
+                alt="Apothekerin hält ein ALKORIN® Original in der Apotheke"
+                loading="eager"
+                width={1448}
+                height={1086}
+                className="h-[320px] w-full object-cover sm:h-[460px] lg:h-[600px]"
+              />
+            </div>
             <img
-              src={pharmacist.url}
-              alt="Apothekerin hält ein ALKORIN® Original in der Apotheke"
-              loading="eager"
-              width={1448}
-              height={1086}
-              className="h-[320px] w-full object-cover sm:h-[460px] lg:h-[600px]"
+              src="/cross.png"
+              alt=""
+              aria-hidden="true"
+              className="absolute -left-4 -top-4 size-16 drop-shadow-lg motion-safe:animate-[badge-float_3.4s_ease-in-out_infinite] sm:size-20"
+            />
+            <img
+              src="/health-care.png"
+              alt=""
+              aria-hidden="true"
+              className="absolute -bottom-4 -right-4 size-16 drop-shadow-lg motion-safe:animate-[badge-float_3.8s_ease-in-out_infinite] [animation-delay:-1.5s] sm:size-20"
             />
           </div>
           <div>
@@ -74,65 +108,17 @@ function UeberUnsPage() {
           </div>
           <ul className="mt-12 grid gap-6 sm:grid-cols-3">
             {VALUES.map((v) => (
-              <li key={v.title} className="rounded-[18px] border border-border bg-card p-7">
-                <h3 className="text-lg font-bold text-navy">{v.title}</h3>
-                <p className="mt-3 leading-relaxed text-muted-foreground">{v.text}</p>
+              <li key={v.title}>
+                <InfoCard
+                  icon={<v.icon className="size-6" strokeWidth={1.8} />}
+                  title={v.title}
+                  description={v.text}
+                  accent={v.accent}
+                  iconBg={v.iconBg}
+                />
               </li>
             ))}
           </ul>
-        </div>
-      </section>
-
-      <section className="section-y">
-        <div className="container-alkorin grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
-          <div>
-            <p className="eyebrow">So funktioniert es</p>
-            <h2 className="mt-4 font-display text-3xl font-extrabold leading-tight text-navy sm:text-4xl">
-              Drei Schritte am Abend.
-            </h2>
-            <ol className="mt-8 space-y-6">
-              <li className="flex gap-4">
-                <span className="text-sm font-bold tabular-nums text-health-green">01</span>
-                <div>
-                  <h3 className="font-bold text-navy">Feiern gehen</h3>
-                  <p className="mt-1 leading-relaxed text-muted-foreground">
-                    Den Abend genießen – ganz ohne Druck.
-                  </p>
-                </div>
-              </li>
-              <li className="flex gap-4">
-                <span className="text-sm font-bold tabular-nums text-health-green">02</span>
-                <div>
-                  <h3 className="font-bold text-navy">Nach Hause kommen</h3>
-                  <p className="mt-1 leading-relaxed text-muted-foreground">
-                    Einen ruhigen Moment für dich nehmen.
-                  </p>
-                </div>
-              </li>
-              <li className="flex gap-4">
-                <span className="text-sm font-bold tabular-nums text-health-green">03</span>
-                <div>
-                  <h3 className="font-bold text-navy">ALKORIN einnehmen</h3>
-                  <p className="mt-1 leading-relaxed text-muted-foreground">
-                    Eine Portion in 250 ml Wasser einrühren – vor dem Schlafengehen.
-                  </p>
-                </div>
-              </li>
-            </ol>
-            <p className="mt-6 text-sm leading-relaxed text-muted-foreground">
-              Bitte beachte die Verzehrempfehlung auf der Verpackung.
-            </p>
-          </div>
-          <div className="overflow-hidden rounded-[22px]">
-            <img
-              src={usage.url}
-              alt="Anleitung: ALKORIN® in Wasser einrühren"
-              loading="lazy"
-              width={1254}
-              height={1254}
-              className="h-[320px] w-full object-cover sm:h-[460px] lg:h-[560px]"
-            />
-          </div>
         </div>
       </section>
     </>

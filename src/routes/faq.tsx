@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { PagePlaceholder } from "@/components/site/PagePlaceholder";
+import { Faq } from "@/components/home/Faq";
 
 export const Route = createFileRoute("/faq")({
   head: () => ({
@@ -12,5 +12,5 @@ export const Route = createFileRoute("/faq")({
       { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
-  component: () => <PagePlaceholder title="Häufige Fragen" description="Antworten rund um ALKORIN®." />,
+  component: () => <Faq />,
 });

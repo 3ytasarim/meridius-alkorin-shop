@@ -1,24 +1,39 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import expertise from "@/assets/lifestyle/expertise.png.asset.json";
-import benefits from "@/assets/lifestyle/benefits.png.asset.json";
-import lifestyleVideo from "@/assets/video-lifestyle.mp4.asset.json";
+import { Citrus, Droplet, Pill, WheatOff } from "lucide-react";
+import { InfoCard } from "@/components/ui/info-card";
+import { CompareReveal } from "@/components/ui/compare-reveal";
+import { TypingAnimation } from "@/components/ui/typing-animation";
+import { ShuffleGrid } from "@/components/ui/shuffle-grid";
+import { MOMENT_IMAGES } from "@/components/home/Moments";
 
 const PILLARS = [
   {
     title: "Mit Cholin",
     text: "Cholin ist ein zentraler Bestandteil der bewährten Rezeptur – unterstützt die Leberfunktion mit Cholin (gemäß Verpackung).",
+    icon: Droplet,
+    accent: "var(--health-green)",
+    iconBg: "var(--soft-green)",
   },
   {
     title: "Vitamine & Mineralstoffe",
     text: "Ausgewählte Vitamine und Mineralstoffe ergänzen die Formel. Mengenangaben findest du auf dem Etikett.",
+    icon: Pill,
+    accent: "var(--health-blue)",
+    iconBg: "var(--soft-blue)",
   },
   {
     title: "Zitronengeschmack",
     text: "Das Pulver lässt sich einfach in Wasser einrühren – mit frischem Zitronengeschmack.",
+    icon: Citrus,
+    accent: "var(--health-yellow)",
+    iconBg: "color-mix(in oklab, var(--health-yellow) 16%, white)",
   },
   {
     title: "Glutenfrei & laktosefrei",
     text: "Ohne Gluten und ohne Laktose – entsprechend der Angaben auf der Verpackung.",
+    icon: WheatOff,
+    accent: "var(--health-blue)",
+    iconBg: "var(--soft-blue)",
   },
 ];
 
@@ -49,32 +64,44 @@ function AlkorinPage() {
     <>
       <section className="relative isolate overflow-hidden bg-navy">
         <img
-          src={expertise.url}
-          alt="Apothekerin empfiehlt ALKORIN® Original"
-          className="absolute inset-0 size-full object-cover"
+          src="/ChatGPT Image 11 Eyl 2026 23_44_06.png"
+          alt="ALKORIN® Produktfamilie auf einer Küchentheke"
+          className="absolute inset-0 size-full object-cover sm:hidden"
           loading="eager"
-          width={1672}
-          height={941}
+          width={1024}
+          height={1536}
         />
-        <div className="absolute inset-0 bg-navy/55" />
-        <div className="container-alkorin relative z-10 flex min-h-[60svh] flex-col justify-center py-20">
-          <p className="inline-flex w-fit items-center gap-3 rounded-full border border-primary-foreground/25 bg-navy/35 px-4 py-2 text-[11px] font-bold uppercase tracking-[0.16em] text-primary-foreground">
-            <span className="size-2 rounded-full bg-health-yellow" />
-            Dem nächsten Tag zuliebe
-          </p>
-          <h1 className="mt-6 max-w-3xl font-display text-[clamp(2.4rem,5.4vw,4.5rem)] font-extrabold leading-[1] text-primary-foreground">
-            Das bewährte ALKORIN® Original.
-          </h1>
-          <p className="mt-6 max-w-xl text-base leading-relaxed text-primary-foreground/85 sm:text-lg">
-            Eine praktisch dosierbare Formel mit Vitaminen, Mineralstoffen und Cholin – vor dem
-            Schlafengehen eingenommen.
-          </p>
-          <Link
-            to="/shop"
-            className="mt-9 inline-flex h-13 w-fit items-center rounded-[11px] bg-primary-foreground px-8 text-sm font-bold text-navy transition-colors hover:bg-soft-green"
-          >
-            Produkte entdecken
-          </Link>
+        <img
+          src="/ChatGPT Image 11 Eyl 2026 23_39_00.png"
+          alt="ALKORIN® Produktfamilie auf einer Küchentheke"
+          className="absolute inset-0 hidden size-full object-cover sm:block"
+          loading="eager"
+          width={1900}
+          height={1000}
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-navy/90 via-navy/70 to-navy/40" />
+        <div className="container-alkorin relative z-10 grid items-center gap-14 py-20 lg:grid-cols-2 lg:gap-20 lg:py-28">
+          <div>
+            <p className="inline-flex w-fit items-center gap-3 rounded-full border border-primary-foreground/25 bg-navy/35 px-4 py-2 text-[11px] font-bold uppercase tracking-[0.16em] text-primary-foreground">
+              <span className="size-2 rounded-full bg-health-yellow" />
+              Dem nächsten Tag zuliebe
+            </p>
+            <h1 className="mt-6 max-w-xl font-display text-[clamp(2.4rem,5.4vw,4.5rem)] font-extrabold leading-[1] text-primary-foreground">
+              Das bewährte ALKORIN® Original.
+            </h1>
+            <p className="mt-6 max-w-xl text-base leading-relaxed text-primary-foreground/85 sm:text-lg">
+              Eine praktisch dosierbare Formel mit Vitaminen, Mineralstoffen und Cholin – vor dem
+              Schlafengehen eingenommen.
+            </p>
+            <Link
+              to="/shop"
+              className="mt-9 inline-flex h-13 w-fit items-center rounded-[11px] bg-primary-foreground px-8 text-sm font-bold text-navy transition-colors hover:bg-soft-green"
+            >
+              Produkte entdecken
+            </Link>
+          </div>
+
+          <ShuffleGrid images={MOMENT_IMAGES} />
         </div>
       </section>
 
@@ -82,7 +109,10 @@ function AlkorinPage() {
         <div className="container-alkorin grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
           <div className="overflow-hidden rounded-[22px] bg-soft-green/50">
             <video
-              src={lifestyleVideo.url}
+              ref={(el) => {
+                if (el) el.muted = true;
+              }}
+              src="/dreamina-2026-09-13-9424-Create a premium 16–17 second image-to-v....mp4"
               autoPlay
               muted
               loop
@@ -124,26 +154,37 @@ function AlkorinPage() {
           </div>
           <ul className="mt-12 grid gap-6 sm:grid-cols-2">
             {PILLARS.map((p) => (
-              <li key={p.title} className="rounded-[18px] border border-border bg-card p-7">
-                <h3 className="text-lg font-bold text-navy">{p.title}</h3>
-                <p className="mt-3 leading-relaxed text-muted-foreground">{p.text}</p>
+              <li key={p.title}>
+                <InfoCard
+                  icon={<p.icon className="size-6" strokeWidth={1.8} />}
+                  title={p.title}
+                  description={p.text}
+                  accent={p.accent}
+                  iconBg={p.iconBg}
+                />
               </li>
             ))}
           </ul>
-          <div className="mt-10 overflow-hidden rounded-[22px]">
-            <img
-              src={benefits.url}
-              alt="ALKORIN® Original Pulver mit Hinweisen glutenfrei und laktosefrei"
-              loading="lazy"
-              width={1672}
-              height={941}
-              className="h-[280px] w-full object-cover sm:h-[420px]"
+          <div className="mt-10">
+            <CompareReveal
+              before={{
+                src: "/ChatGPT Image 13 Eyl 2026 01_12_49.png",
+                alt: "Vorher: durch übermäßigen Alkoholkonsum stark beanspruchte Leber",
+              }}
+              after={{
+                src: "/After.png",
+                alt: "Nachher: Unterstützung der Leberfunktion mit ALKORIN® und Cholin",
+              }}
+              labels={["Vorher", "Nachher"]}
+              className="aspect-[1.88/1]"
             />
           </div>
-          <p className="mt-6 text-sm leading-relaxed text-muted-foreground">
-            Nahrungsergänzungsmittel sind kein Ersatz für eine abwechslungsreiche und ausgewogene
-            Ernährung sowie eine gesunde Lebensweise.
-          </p>
+          <TypingAnimation
+            text="Symbolische Darstellung. Nahrungsergänzungsmittel sind kein Ersatz für eine abwechslungsreiche und ausgewogene Ernährung sowie eine gesunde Lebensweise."
+            duration={20}
+            startOnView
+            className="mt-6 text-base font-semibold leading-relaxed tracking-normal text-navy drop-shadow-none sm:text-lg"
+          />
         </div>
       </section>
     </>

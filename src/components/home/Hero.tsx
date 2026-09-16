@@ -1,66 +1,71 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
-import heroVideo from "@/assets/reklam-videosu.mp4.asset.json";
-
-const TRUST = ["Seit über 10 Jahren", "Praktisch dosierbar", "Versand aus Deutschland"];
+import { Ripple } from "@/components/ui/ripple";
+import { GradientText } from "@/components/ui/gradient-text";
+import { BestsellerBadge } from "@/components/ui/bestseller-badge";
 
 export function Hero() {
   return (
-    <section className="relative isolate min-h-[86svh] overflow-hidden bg-navy lg:min-h-[92svh]">
-      <video
-        className="absolute inset-0 size-full object-cover object-center"
-        src={heroVideo.url}
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="metadata"
-        aria-label="ALKORIN® Produkt- und Lifestyle-Video"
+    <section className="relative isolate overflow-hidden bg-navy">
+      {/* Foto als Vollflächen-Hintergrund – eigenes Hochformat-Motiv für Mobile */}
+      <img
+        src="/ChatGPT Image 11 Eyl 2026 23_46_39.png"
+        alt="ALKORIN® Original mit Zitronenlimonade und Kapseln in heller Küche"
+        className="absolute inset-0 -z-20 h-full w-full object-cover sm:hidden"
       />
-      <div className="absolute inset-0 bg-navy/55" />
+      <img
+        src="/ChatGPT Image 11 Eyl 2026 19_05_17.png"
+        alt="ALKORIN® Original mit Zitronenlimonade und Kapseln in heller Küche"
+        className="absolute inset-0 -z-20 hidden h-full w-full object-cover sm:block"
+      />
+      {/* Schatten-Verlauf links → rechts, damit der Text über dem Foto lesbar bleibt */}
       <div
-        className="absolute inset-x-0 bottom-0 h-1/2"
-        style={{ background: "linear-gradient(to top, oklch(0.325 0.079 257 / 0.75), transparent)" }}
+        aria-hidden
+        className="absolute inset-0 -z-10 bg-gradient-to-r from-navy/85 via-navy/55 to-navy/10"
       />
 
-      <div className="container-alkorin relative z-10 flex min-h-[86svh] flex-col justify-center py-20 lg:min-h-[92svh]">
-        <div className="max-w-3xl">
-          <p className="inline-flex items-center gap-3 rounded-full border border-primary-foreground/25 bg-navy/35 px-4 py-2 text-[11px] font-bold uppercase tracking-[0.16em] text-primary-foreground backdrop-blur-sm">
+      <div className="container-alkorin relative z-10 flex min-h-[560px] items-center py-20 sm:min-h-[620px] lg:min-h-[calc(100svh-2rem)] lg:py-28">
+        <div className="pointer-events-none absolute right-0 top-24 z-20 hidden sm:right-2 sm:top-28 sm:block lg:right-6 lg:top-32">
+          <BestsellerBadge size={205} label="UNSER BESTSELLER" number="#1" />
+        </div>
+
+        <div className="min-w-0 max-w-xl">
+          <p className="inline-flex items-center gap-2.5 rounded-full border border-border bg-card px-4 py-2 text-[11px] font-bold uppercase tracking-[0.16em] text-navy/80 shadow-sm">
             <span className="size-2 rounded-full bg-health-yellow" />
             Dem nächsten Tag zuliebe · ALKORIN® Original
           </p>
-          <h1 className="mt-6 font-display text-[clamp(2.6rem,6.4vw,5.5rem)] font-extrabold leading-[0.98] text-primary-foreground">
+
+          <h1 className="mt-6 font-display text-[clamp(2.4rem,4.6vw,4rem)] font-extrabold leading-[1.03] tracking-tight text-white [text-shadow:0_2px_16px_rgba(0,0,0,0.25)]">
             Bereit für morgen.
-            <span className="mt-1 block text-health-green">Gemacht für heute.</span>
+            <GradientText className="mt-1 block">Gemacht für heute.</GradientText>
           </h1>
-          <p className="mt-6 max-w-xl text-base leading-relaxed text-primary-foreground/80 sm:text-lg">
+
+          <p className="mt-6 max-w-md text-base font-medium leading-relaxed text-white/85 [text-shadow:0_1px_10px_rgba(0,0,0,0.2)] sm:text-lg">
             Ausgewählte Vitamine, Mineralstoffe und Cholin – als unkomplizierte Routine für
             Menschen, die bewusst durch ihren Alltag gehen.
           </p>
 
-          <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <Link
               to="/shop"
-              className="inline-flex min-h-13 items-center justify-center rounded-[11px] bg-primary-foreground px-8 text-sm font-bold text-navy transition-colors hover:bg-soft-green"
+              className="relative isolate inline-flex min-h-13 items-center justify-center overflow-hidden rounded-[11px] bg-navy px-8 text-sm font-bold text-primary-foreground shadow-lg shadow-navy/30 transition-colors hover:bg-navy/90"
             >
-              Jetzt entdecken
+              <Ripple color="rgba(255,255,255,0.4)" />
+              <span className="relative z-10">Jetzt entdecken</span>
             </Link>
             <Link
               to="/alkorin"
-              className="group inline-flex min-h-13 items-center justify-center gap-2 rounded-[11px] border border-primary-foreground/35 px-8 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary-foreground/10"
+              className="group relative isolate inline-flex min-h-13 items-center justify-center gap-2 overflow-hidden rounded-[11px] border border-white/40 bg-white/5 px-8 text-sm font-semibold text-white backdrop-blur-sm transition-colors hover:bg-white/15"
             >
-              Alkorin kennenlernen
-              <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
+              <Ripple color="rgba(255,255,255,0.25)" />
+              <span className="relative z-10 inline-flex items-center gap-2">
+                Alkorin kennenlernen
+                <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
+              </span>
             </Link>
           </div>
         </div>
       </div>
-
-      <ul className="absolute inset-x-0 bottom-0 z-10 flex flex-wrap justify-center gap-x-8 gap-y-2 border-t border-primary-foreground/15 bg-navy/40 px-4 py-4 text-[11px] font-bold uppercase tracking-[0.14em] text-primary-foreground/80 backdrop-blur-sm sm:text-xs">
-        {TRUST.map((t) => (
-          <li key={t}>{t}</li>
-        ))}
-      </ul>
     </section>
   );
 }

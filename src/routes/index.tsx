@@ -1,16 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Hero } from "@/components/home/Hero";
-import { TrustStrip } from "@/components/home/TrustStrip";
+import { AvailableAt } from "@/components/home/AvailableAt";
 import { Products } from "@/components/home/Products";
 import { WhyAlkorin } from "@/components/home/WhyAlkorin";
-import { Routine } from "@/components/home/Routine";
 import { Ingredients } from "@/components/home/Ingredients";
 import { LifestyleStory } from "@/components/home/LifestyleStory";
 import { Reviews } from "@/components/home/Reviews";
-import { Moments } from "@/components/home/Moments";
 import { Quality } from "@/components/home/Quality";
 import { Faq } from "@/components/home/Faq";
-import { FinalCta } from "@/components/home/FinalCta";
 
 const TITLE = "ALKORIN® – Bewährte Rezeptur für deine Abendroutine";
 const DESCRIPTION =
@@ -34,17 +31,14 @@ function Index() {
   return (
     <>
       <Hero />
-      <TrustStrip />
       <Products />
+      <AvailableAt />
       <WhyAlkorin />
-      <Routine />
       <Ingredients />
-      <LifestyleStory />
-      <Reviews />
-      <Moments />
       <Quality />
+      <Reviews />
+      <LifestyleStory />
       <Faq />
-      <FinalCta />
     </>
   );
 }

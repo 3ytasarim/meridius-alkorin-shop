@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Check, Minus, Plus, ShieldCheck, Truck, Wallet } from "lucide-react";
 import { PRODUCTS, formatPrice, getProduct } from "@/lib/products";
 import { ProductCard } from "@/components/shop/ProductCard";
+import { AnimatedPrice } from "@/components/ui/animated-price";
 import { useCart } from "@/lib/cart";
 
 export const Route = createFileRoute("/produkt/$slug")({
@@ -61,9 +62,10 @@ function ProductPage() {
 
           <div className="mt-8 grid gap-10 lg:grid-cols-2 lg:gap-16">
             <div>
-              <div className="relative overflow-hidden rounded-[22px] bg-soft-green p-8">
+              <div className="relative overflow-hidden bg-soft-green p-8">
                 {product.badge ? (
-                  <span className="absolute left-6 top-6 rounded-md bg-health-yellow px-2.5 py-1 text-[11px] font-bold uppercase tracking-wide text-navy">
+                  <span className="absolute left-6 top-6 inline-flex items-center gap-1.5 rounded-full bg-health-yellow px-3 py-1.5 text-[10px] font-extrabold uppercase tracking-widest text-navy shadow-[0_6px_16px_-4px_rgba(0,0,0,0.25)] ring-1 ring-inset ring-white/50">
+                    <span className="size-1.5 rounded-full bg-navy/60" />
                     {product.badge}
                   </span>
                 ) : null}
@@ -81,6 +83,7 @@ function ProductPage() {
                     <button
                       type="button"
                       onClick={() => setActive(i)}
+                      onMouseEnter={() => setActive(i)}
                       aria-label={`Bild ${i + 1} anzeigen`}
                       aria-current={i === active}
                       className={`block w-full overflow-hidden rounded-[14px] border bg-soft-blue transition-colors ${
@@ -109,9 +112,10 @@ function ProductPage() {
               </p>
 
               <div className="mt-6 flex items-baseline gap-3">
-                <p className="text-3xl font-extrabold text-navy">
-                  {formatPrice(product.priceCents)}
-                </p>
+                <AnimatedPrice
+                  cents={product.priceCents}
+                  className="text-3xl font-extrabold text-navy"
+                />
                 {product.compareAtCents ? (
                   <span className="text-lg text-muted-foreground line-through">
                     {formatPrice(product.compareAtCents)}
@@ -205,6 +209,9 @@ function ProductPage() {
           <div className="container-alkorin">
             <div className="overflow-hidden rounded-[22px] bg-soft-green/50">
               <video
+                ref={(el) => {
+                  if (el) el.muted = true;
+                }}
                 src={product.video}
                 autoPlay
                 muted

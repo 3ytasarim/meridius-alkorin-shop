@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { Check } from "lucide-react";
 import { formatPrice, type Product } from "@/lib/products";
 import { useCart } from "@/lib/cart";
+import { AnimatedPrice } from "@/components/ui/animated-price";
 
 export function ProductCard({ product }: { product: Product }) {
   const { add } = useCart();
@@ -11,22 +12,38 @@ export function ProductCard({ product }: { product: Product }) {
       <Link
         to="/produkt/$slug"
         params={{ slug: product.slug }}
-        className="relative block bg-soft-green p-6"
+        className="relative block"
         aria-label={product.name}
       >
-        {product.badge ? (
-          <span className="absolute left-5 top-5 z-10 rounded-md bg-health-yellow px-2.5 py-1 text-[11px] font-bold uppercase tracking-wide text-navy">
-            {product.badge}
+        <div className="relative bg-soft-green p-6">
+          {product.badge ? (
+            <span className="absolute left-5 top-5 z-20 inline-flex items-center gap-1.5 rounded-full bg-health-yellow px-3 py-1.5 text-[10px] font-extrabold uppercase tracking-widest text-navy shadow-[0_6px_16px_-4px_rgba(0,0,0,0.25)] ring-1 ring-inset ring-white/50">
+              <span className="size-1.5 rounded-full bg-navy/60" />
+              {product.badge}
+            </span>
+          ) : null}
+          <span className="relative mx-auto block aspect-square w-full max-w-[320px]">
+            <img
+              src={product.image}
+              alt={product.name}
+              loading="lazy"
+              width={1008}
+              height={1008}
+              className="absolute inset-0 size-full object-contain mix-blend-multiply opacity-100 transition duration-500 ease-in-out group-hover:scale-[1.04] group-hover:opacity-0"
+            />
           </span>
+        </div>
+        {product.gallery[1] ? (
+          <img
+            src={product.gallery[1]}
+            alt=""
+            aria-hidden="true"
+            loading="lazy"
+            width={1008}
+            height={1008}
+            className="absolute inset-0 z-10 size-full object-cover opacity-0 transition duration-500 ease-in-out group-hover:opacity-100"
+          />
         ) : null}
-        <img
-          src={product.image}
-          alt={product.name}
-          loading="lazy"
-          width={1008}
-          height={1008}
-          className="mx-auto aspect-square w-full max-w-[320px] object-contain transition-transform duration-500 group-hover:scale-[1.04]"
-        />
       </Link>
 
       <div className="flex flex-1 flex-col p-6">
@@ -51,7 +68,7 @@ export function ProductCard({ product }: { product: Product }) {
 
         <div className="mt-auto pt-6">
           <div className="flex items-baseline gap-2">
-            <p className="text-lg font-extrabold text-navy">{formatPrice(product.priceCents)}</p>
+            <AnimatedPrice cents={product.priceCents} className="text-lg font-extrabold text-navy" />
             {product.compareAtCents ? (
               <span className="text-sm text-muted-foreground line-through">
                 {formatPrice(product.compareAtCents)}

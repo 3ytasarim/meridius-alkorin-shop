@@ -1,25 +1,18 @@
-import originalMain from "@/assets/products/original-main.jpg.asset.json";
-import original2 from "@/assets/products/original-2.jpg.asset.json";
-import original3 from "@/assets/products/original-3.jpg.asset.json";
-import original4 from "@/assets/products/original-4.jpg.asset.json";
-import original5 from "@/assets/products/original-5.jpg.asset.json";
-import sachet10Main from "@/assets/products/sachet10-main.jpg.asset.json";
-import sachet10_2 from "@/assets/products/sachet10-2.jpg.asset.json";
-import sachet10_3 from "@/assets/products/sachet10-3.jpg.asset.json";
-import sachet10_4 from "@/assets/products/sachet10-4.jpg.asset.json";
-import sachet10_5 from "@/assets/products/sachet10-5.jpg.asset.json";
-import sachet40Main from "@/assets/products/sachet40-main.jpg.asset.json";
-import sachet40_2 from "@/assets/products/sachet40-2.jpg.asset.json";
-import sachet40_3 from "@/assets/products/sachet40-3.jpg.asset.json";
-import sachet40_4 from "@/assets/products/sachet40-4.jpg.asset.json";
-import sachet40_5 from "@/assets/products/sachet40-5.jpg.asset.json";
-import kapselnMain from "@/assets/products/kapseln-main.jpg.asset.json";
-import kapseln2 from "@/assets/products/kapseln-2.jpg.asset.json";
-import kapseln3 from "@/assets/products/kapseln-3.jpg.asset.json";
-import kapseln4 from "@/assets/products/kapseln-4.jpg.asset.json";
-import videoOriginal from "@/assets/video-original.mp4.asset.json";
-import videoSachets from "@/assets/video-sachets.mp4.asset.json";
-import videoKapseln from "@/assets/video-kapseln.mp4.asset.json";
+const originalMain = "/product-original-main.jpg";
+const original3 = "/product-original-3.jpg";
+const original4 = "/product-original-4.jpg";
+const sachet10_3 = "/product-sachet10-3.jpg";
+const sachet10_4 = "/product-sachet10-4.jpg";
+const sachet10_5 = "/product-sachet10-5.jpg";
+const sachet40_3 = "/product-sachet40-3.jpg";
+const sachet40_4 = "/product-sachet40-4.jpg";
+const sachet40_5 = "/product-sachet40-5.jpg";
+const kapselnMain = "/product-kapseln-main.jpg";
+const kapseln3 = "/product-kapseln-3.jpg";
+const kapseln4 = "/product-kapseln-4.jpg";
+const videoOriginal = "/product-video-original.mp4";
+const videoSachets = "/product-video-sachets.mp4";
+const videoKapseln = "/product-video-kapseln.mp4";
 
 export type Product = {
   slug: string;
@@ -56,15 +49,15 @@ export const PRODUCTS: Product[] = [
     unit: "100 g",
     servings: "ca. 25 Portionen",
     badge: "Bestseller",
-    image: originalMain.url,
+    image: originalMain,
     gallery: [
-      originalMain.url,
-      original2.url,
-      original3.url,
-      original4.url,
-      original5.url,
+      originalMain,
+      "/ElevenLabs_image_recraft-v4_Create ONE ultr_2026-09-11T19_05_12.webp",
+      original3,
+      original4,
+      "/ChatGPT Image 11 Eyl 2026 23_34_48.png",
     ],
-    video: videoOriginal.url,
+    video: videoOriginal,
     benefits: [
       "Bewährte Rezeptur mit Cholin, Vitaminen und Mineralstoffen",
       "Mit Zitronengeschmack – einfach in Wasser einrühren",
@@ -86,15 +79,15 @@ export const PRODUCTS: Product[] = [
     unit: "10 Portionen",
     servings: "10 Einzelportionen",
     badge: null,
-    image: sachet10Main.url,
+    image: "/B00RXZVVSA.MAIN.jpg",
     gallery: [
-      sachet10Main.url,
-      sachet10_2.url,
-      sachet10_3.url,
-      sachet10_4.url,
-      sachet10_5.url,
+      "/B00RXZVVSA.MAIN.jpg",
+      "/ElevenLabs_image_recraft-v4_Create ONE ultr_2026-09-11T19_22_17.webp",
+      sachet10_3,
+      sachet10_4,
+      sachet10_5,
     ],
-    video: videoSachets.url,
+    video: videoSachets,
     benefits: [
       "Vorportioniert – kein Abmessen nötig",
       "Passt in Tasche und Handschuhfach",
@@ -116,15 +109,15 @@ export const PRODUCTS: Product[] = [
     unit: "40 Portionen",
     servings: "40 Einzelportionen",
     badge: "Vorratsgröße",
-    image: sachet40Main.url,
+    image: "/B082RWG1J6.MAIN.jpg",
     gallery: [
-      sachet40Main.url,
-      sachet40_2.url,
-      sachet40_3.url,
-      sachet40_4.url,
-      sachet40_5.url,
+      "/B082RWG1J6.MAIN.jpg",
+      "/ElevenLabs_image_recraft-v4_Create ONE extr_2026-09-11T19_38_54.webp",
+      sachet40_3,
+      sachet40_4,
+      sachet40_5,
     ],
-    video: videoSachets.url,
+    video: videoSachets,
     benefits: [
       "Vorratsgröße – seltener nachbestellen",
       "Vorportioniert – kein Abmessen nötig",
@@ -146,9 +139,14 @@ export const PRODUCTS: Product[] = [
     unit: "60 Kapseln",
     servings: "ca. 30 Tage",
     badge: null,
-    image: kapselnMain.url,
-    gallery: [kapselnMain.url, kapseln2.url, kapseln3.url, kapseln4.url],
-    video: videoKapseln.url,
+    image: kapselnMain,
+    gallery: [
+      kapselnMain,
+      "/ElevenLabs_image_recraft-v4_Create ONE ultr_2026-09-11T19_16_03.webp",
+      kapseln3,
+      kapseln4,
+    ],
+    video: videoKapseln,
     benefits: [
       "Geschmacksneutral – ideal auf Reisen",
       "Klare Tagesdosierung",

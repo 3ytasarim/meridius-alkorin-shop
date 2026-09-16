@@ -6,9 +6,10 @@ export function getSql() {
   return neon(url);
 }
 
-export function assertAdmin(password: string) {
-  const expected = process.env["ADMIN_PASSWORD"];
-  if (!expected || password !== expected) {
-    throw new Error("Falsches Passwort");
+export function assertAdmin(username: string, password: string) {
+  const expectedUser = process.env["ADMIN_USERNAME"];
+  const expectedPass = process.env["ADMIN_PASSWORD"];
+  if (!expectedUser || !expectedPass || username !== expectedUser || password !== expectedPass) {
+    throw new Error("Falscher Benutzername oder Passwort");
   }
 }

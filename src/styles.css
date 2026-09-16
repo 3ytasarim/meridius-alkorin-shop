@@ -68,6 +68,9 @@
   --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
   --font-display: "Manrope", ui-sans-serif, system-ui, sans-serif;
   --shadow-card: var(--shadow-soft);
+  /* logo-cloud-15 (21st.dev) Marquee-Animationen */
+  --animate-marquee: marquee var(--duration, 40s) linear infinite;
+  --animate-marquee-vertical: marquee-vertical var(--duration, 40s) linear infinite;
 }
 
 
@@ -196,11 +199,27 @@
 }
 
 @utility eyebrow {
-  font-size: 0.75rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  border-radius: 9999px;
+  border: 1px solid color-mix(in oklab, var(--health-green) 32%, transparent);
+  background: color-mix(in oklab, var(--soft-green) 72%, var(--health-yellow));
+  padding: 0.45rem 0.9rem;
+  font-size: 0.6875rem;
   font-weight: 700;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--health-blue);
+  color: color-mix(in oklab, var(--navy) 88%, transparent);
+
+  &::before {
+    content: "";
+    width: 0.4rem;
+    height: 0.4rem;
+    flex: none;
+    border-radius: 9999px;
+    background: var(--health-yellow);
+  }
 }
 
 @keyframes fade-up {
@@ -211,6 +230,80 @@
   to {
     opacity: 1;
     transform: none;
+  }
+}
+
+@keyframes ripple {
+  from {
+    transform: scale(0);
+    opacity: 0.42;
+  }
+  to {
+    transform: scale(1);
+    opacity: 0;
+  }
+}
+
+@keyframes om-float {
+  0%,
+  100% {
+    transform: translateY(-10px);
+  }
+  50% {
+    transform: translateY(10px);
+  }
+}
+
+/* Von unten nach oben aufsteigende, oben ausblendende Partikel-Schleife
+   (Ingredients-Icons im Hintergrund). */
+@keyframes rise-fade {
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  12% {
+    opacity: 1;
+  }
+  75% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(var(--rise-distance, -460px));
+    opacity: 0;
+  }
+}
+
+@keyframes badge-float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-4deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(4deg);
+  }
+}
+
+@keyframes gradient-text {
+  to {
+    background-position: 200% center;
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(-100% - var(--gap, 1rem)));
+  }
+}
+
+@keyframes marquee-vertical {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(calc(-100% - var(--gap, 1rem)));
   }
 }
 
@@ -265,6 +358,216 @@
 
   .hero-expand__copy {
     transform: none;
+  }
+}
+
+/*
+ * BestsellerBadge — "UNSER BESTSELLER #1" animiertes Produkt-Siegel.
+ * Wortgetreuer Port des Design-Handoffs (High-Fidelity, Werte final).
+ * Authoring-Raster 420x420; skaliert proportional über width/height am .bsb.
+ */
+.bsb {
+  position: relative;
+  font-family: "Manrope", Helvetica, sans-serif;
+  animation: bsb-pop 0.9s cubic-bezier(0.2, 0.8, 0.25, 1) both;
+  container-type: inline-size;
+}
+.bsb__disc {
+  position: absolute;
+  inset: 2.86%;
+  border-radius: 50%;
+  background: #17345c;
+  overflow: hidden;
+  box-shadow: 0 24px 60px -20px rgba(23, 52, 92, 0.55);
+}
+.bsb__gloss {
+  position: absolute;
+  top: -20%;
+  left: 0;
+  width: 60%;
+  height: 140%;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.16) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  animation: bsb-shine 5s ease-in-out infinite;
+}
+.bsb__svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+.bsb__ring {
+  transform-origin: 210px 210px;
+  animation: bsb-spin 26s linear infinite;
+}
+.bsb__center {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.bsb__beat {
+  animation: bsb-heartbeat 2.4s ease-in-out infinite;
+}
+.bsb__num {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 35.2cqw; /* = 148px bei 420px */
+  line-height: 1;
+  letter-spacing: -0.027em;
+  color: #ffd24a;
+  text-shadow: 0 8px 28px rgba(255, 210, 74, 0.42);
+}
+
+@keyframes bsb-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes bsb-pop {
+  0% {
+    transform: scale(0.82);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.04);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+@keyframes bsb-heartbeat {
+  0%,
+  28%,
+  100% {
+    transform: scale(1);
+  }
+  10% {
+    transform: scale(1.1);
+  }
+  19% {
+    transform: scale(1.02);
+  }
+  24% {
+    transform: scale(1.07);
+  }
+}
+@keyframes bsb-shine {
+  0% {
+    transform: translateX(-130%) rotate(18deg);
+  }
+  55%,
+  100% {
+    transform: translateX(130%) rotate(18deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bsb,
+  .bsb__ring,
+  .bsb__beat,
+  .bsb__gloss {
+    animation: none !important;
+  }
+}
+
+/* ScrollToTop – Kreis-Button, der sich beim Runterscrollen wie mit Wasser
+   füllt (Scrollfortschritt der Seite) und beim Klick nach oben scrollt.
+   Wave-Technik 1:1 aus der vom Nutzer bereitgestellten Referenz
+   (scroll-progress-indicator-cursor-vue): ein übergroßer, rotierender Blob,
+   dessen `top` von 100% (komplett verborgen) auf 0% (volle Deckung) fährt. */
+.scroll-water-mask {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: 9999px;
+}
+
+.scroll-water-wave {
+  position: absolute;
+  top: 100%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  border-radius: 38%;
+  background: color-mix(in oklab, var(--health-yellow) 88%, white);
+  transition: top 0.2s ease;
+  animation: scroll-wave-spin 4s linear infinite;
+}
+
+.scroll-water-wave::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 38%;
+  background: color-mix(in oklab, var(--health-yellow) 55%, white);
+  animation: scroll-wave-spin 2.4s linear infinite reverse;
+}
+
+@keyframes scroll-wave-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-water-wave,
+  .scroll-water-wave::after {
+    animation: none !important;
+  }
+}
+
+/* AdminLoginBackground – Punkteraster in Markenfarben (Navy/Grün/Gelb/Blau)
+   hinter dem Admin-Login, rein per CSS statt WebGL. */
+.admin-dot-grid {
+  background-image:
+    radial-gradient(circle, var(--health-yellow) 0 6px, transparent 6px),
+    radial-gradient(circle, var(--health-green) 0 6px, transparent 6px),
+    radial-gradient(circle, var(--health-blue) 0 6px, transparent 6px),
+    radial-gradient(circle, var(--navy) 0 6px, transparent 6px);
+  background-size: 40px 40px;
+  background-position:
+    0 0,
+    20px 10px,
+    10px 30px,
+    30px 20px;
+  opacity: 0.8;
+  animation: admin-dot-drift 24s linear infinite;
+}
+
+@keyframes admin-dot-drift {
+  from {
+    background-position:
+      0 0,
+      20px 10px,
+      10px 30px,
+      30px 20px;
+  }
+  to {
+    background-position:
+      40px 40px,
+      60px 50px,
+      50px 70px,
+      70px 60px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .admin-dot-grid {
+    animation: none !important;
   }
 }
 

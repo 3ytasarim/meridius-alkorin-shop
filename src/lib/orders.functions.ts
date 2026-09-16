@@ -85,19 +85,24 @@ export const createOrder = createServerFn({ method: "POST" })
     return { orderNo, totalCents };
   });
 
+const credentialsSchema = z.object({
+  username: z.string().max(200),
+  password: z.string().max(200),
+});
+
 export const adminLogin = createServerFn({ method: "POST" })
-  .inputValidator((input: unknown) => z.object({ password: z.string().max(200) }).parse(input))
+  .inputValidator((input: unknown) => credentialsSchema.parse(input))
   .handler(async ({ data }) => {
     const { assertAdmin } = await import("./db.server");
-    assertAdmin(data.password);
+    assertAdmin(data.username, data.password);
     return { ok: true as const };
   });
 
 export const listOrders = createServerFn({ method: "POST" })
-  .inputValidator((input: unknown) => z.object({ password: z.string().max(200) }).parse(input))
+  .inputValidator((input: unknown) => credentialsSchema.parse(input))
   .handler(async ({ data }) => {
     const { getSql, assertAdmin } = await import("./db.server");
-    assertAdmin(data.password);
+    assertAdmin(data.username, data.password);
     const sql = getSql();
     const rows = await sql`select * from orders order by created_at desc limit 500`;
     return rows as unknown as OrderRow[];
@@ -105,9 +110,8 @@ export const listOrders = createServerFn({ method: "POST" })
 
 export const updateOrderStatus = createServerFn({ method: "POST" })
   .inputValidator((input: unknown) =>
-    z
-      .object({
-        password: z.string().max(200),
+    credentialsSchema
+      .extend({
         id: z.number().int(),
         status: z.enum(ORDER_STATUSES),
       })
@@ -115,7 +119,7 @@ export const updateOrderStatus = createServerFn({ method: "POST" })
   )
   .handler(async ({ data }) => {
     const { getSql, assertAdmin } = await import("./db.server");
-    assertAdmin(data.password);
+    assertAdmin(data.username, data.password);
     const sql = getSql();
     await sql`update orders set status = ${data.status} where id = ${data.id}`;
     return { ok: true as const };
