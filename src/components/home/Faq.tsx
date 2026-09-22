@@ -67,7 +67,7 @@ export function Faq() {
           src="/ChatGPT Image 12 Eyl 2026 00_04_51.png"
           alt="ALKORIN® Produktfamilie auf einer Küchentheke"
           loading="lazy"
-          className="aspect-[4/5] w-full shrink-0 rounded-[22px] object-cover object-center shadow-card md:aspect-auto md:max-w-md md:self-stretch"
+          className="aspect-[4/5] w-full shrink-0 rounded-[22px] object-cover object-[40%_center] shadow-card md:aspect-auto md:max-w-md md:self-stretch"
         />
 
         <div className="w-full">
