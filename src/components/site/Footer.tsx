@@ -26,7 +26,6 @@ const NAV = [
       { label: "Impressum", to: "/impressum" },
       { label: "Datenschutz", to: "/datenschutz" },
       { label: "AGB", to: "/agb" },
-      { label: "Widerruf", to: "/widerruf" },
     ],
   },
 ] as const;
@@ -60,10 +59,10 @@ export function Footer() {
         <div className="flex flex-col items-center md:items-start">
           <Link to="/" className="mb-4 flex items-center gap-2">
             <img
-              src="/Meridius_Logo.png"
+              src="/Meridius_Logo_Dark_Header.png"
               alt="Meridius"
-              width={2172}
-              height={724}
+              width={2008}
+              height={378}
               className="h-12 w-auto"
             />
           </Link>

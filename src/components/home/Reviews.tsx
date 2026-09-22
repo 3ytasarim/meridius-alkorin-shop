@@ -40,7 +40,7 @@ const REVIEWS = [
   },
   {
     name: "Daniel Brandt",
-    text: "Bestellung war unkompliziert, Lieferung kam schnell. Zahlung bei Lieferung ist ein großes Plus.",
+    text: "Bestellung war unkompliziert, Lieferung kam schnell. Der Kauf auf Rechnung ist ein großes Plus.",
     avatar: 44,
   },
   {

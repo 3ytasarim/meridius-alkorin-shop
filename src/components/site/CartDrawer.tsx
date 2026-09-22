@@ -6,12 +6,21 @@ import {
   ShoppingBag,
   Trash2,
   Truck,
+  Wallet,
   X,
   CheckCircle2,
 } from "lucide-react";
 import { useCart } from "@/lib/cart";
-import { formatPrice } from "@/lib/products";
+import { formatChf, toChfCents } from "@/lib/currency";
 import { createOrder } from "@/lib/orders.functions";
+
+type Country = "CH" | "DE";
+const COUNTRY_LABEL: Record<Country, string> = { CH: "Schweiz", DE: "Deutschland" };
+const EUR_FORMATTER = new Intl.NumberFormat("de-DE", { style: "currency", currency: "EUR" });
+
+/** Porto & Verpackung: 6.- (CHF bzw. EUR je nach Land), gratis ab 100.- Warenwert. */
+const SHIPPING_FEE_CENTS = 600;
+const FREE_SHIPPING_THRESHOLD_CENTS = 10000;
 
 type Fields = {
   firstName: string;
@@ -48,6 +57,18 @@ const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export function CartDrawer() {
   const { items, count, totalCents, open, setOpen, setQty, remove, clear } = useCart();
+  const [country, setCountry] = useState<Country>("CH");
+  const countryLabel = COUNTRY_LABEL[country];
+  const formatPrice = (eurCents: number) =>
+    country === "CH" ? formatChf(toChfCents(eurCents)) : EUR_FORMATTER.format(eurCents / 100);
+  const formatDisplay = (displayCents: number) =>
+    country === "CH" ? formatChf(displayCents) : EUR_FORMATTER.format(displayCents / 100);
+
+  const subtotalCents = country === "CH" ? toChfCents(totalCents) : totalCents;
+  const shippingCents =
+    subtotalCents >= FREE_SHIPPING_THRESHOLD_CENTS ? 0 : SHIPPING_FEE_CENTS;
+  const grandTotalCents = subtotalCents + shippingCents;
+
   const [step, setStep] = useState<"cart" | "form">("cart");
   const [fields, setFields] = useState<Fields>(EMPTY);
   const [fieldErrors, setFieldErrors] = useState<Partial<Record<keyof Fields, string>>>({});
@@ -83,9 +104,14 @@ export function CartDrawer() {
     if (!validate()) return;
     setBusy(true);
     try {
+      const shippingLabel =
+        shippingCents === 0 ? "kostenlos" : `${formatDisplay(shippingCents)} Versandkosten`;
+      const currencyNote = `Land: ${countryLabel} – Zwischensumme ${formatDisplay(subtotalCents)}, Versand ${shippingLabel}, Gesamt ${formatDisplay(grandTotalCents)}`;
+      const note = [currencyNote, fields.note.trim()].filter(Boolean).join(" · ");
       const res = await createOrder({
         data: {
           ...fields,
+          note,
           items: items.map((i) => ({ slug: i.slug, qty: i.qty })),
         },
       });
@@ -138,7 +164,7 @@ export function CartDrawer() {
         <div className="flex items-center justify-between border-b border-border px-5 py-4">
           <p className="flex items-center gap-2 text-base font-bold text-navy">
             <ShoppingBag className="size-5" strokeWidth={1.8} />
-            {step === "cart" ? `Warenkorb (${count})` : "Zahlung bei Lieferung – Bestellung"}
+            {step === "cart" ? `Warenkorb (${count})` : "Bestellung per Rechnung"}
           </p>
           <button
             type="button"
@@ -206,11 +232,47 @@ export function CartDrawer() {
             </ul>
             <div className="border-t border-border px-5 py-5">
               <p className="flex items-center gap-2 rounded-[10px] bg-soft-green px-3 py-2 text-xs font-semibold text-navy">
-                <Truck className="size-4" strokeWidth={1.8} /> Zahlung bei Lieferung
+                <Truck className="size-4" strokeWidth={1.8} /> Versand nach {countryLabel}
               </p>
-              <div className="mt-4 flex items-center justify-between text-base font-bold text-navy">
+              <p className="mt-2 flex items-center gap-2 rounded-[10px] bg-soft-blue px-3 py-2 text-xs font-semibold text-navy">
+                <Wallet className="size-4" strokeWidth={1.8} /> Kauf auf Rechnung – 14 Tage
+                Zahlungsfrist
+              </p>
+              <label className="mt-4 block">
+                <span className="mb-1.5 block text-xs font-semibold text-muted-foreground">
+                  Lieferland
+                </span>
+                <select
+                  value={country}
+                  onChange={(e) => setCountry(e.target.value as Country)}
+                  className="h-11 w-full rounded-[10px] border border-border bg-background px-3 text-sm font-medium text-foreground outline-none transition-colors focus:border-navy"
+                >
+                  <option value="CH">Schweiz (CHF)</option>
+                  <option value="DE">Deutschland (EUR)</option>
+                </select>
+              </label>
+              <div className="mt-4 space-y-2 border-t border-border pt-4">
+                <div className="flex items-center justify-between text-sm text-muted-foreground">
+                  <span>Zwischensumme</span>
+                  <span>{formatDisplay(subtotalCents)}</span>
+                </div>
+                <div className="flex items-center justify-between text-sm text-muted-foreground">
+                  <span className="flex items-center gap-1.5">
+                    <Truck className="size-4" strokeWidth={1.8} /> Porto &amp; Verpackung
+                  </span>
+                  <span className={shippingCents === 0 ? "font-semibold text-health-green" : ""}>
+                    {shippingCents === 0 ? "Kostenlos" : formatDisplay(shippingCents)}
+                  </span>
+                </div>
+                {shippingCents > 0 ? (
+                  <p className="text-[11px] text-muted-foreground">
+                    Gratis Versand ab {formatDisplay(FREE_SHIPPING_THRESHOLD_CENTS)} Bestellwert.
+                  </p>
+                ) : null}
+              </div>
+              <div className="mt-3 flex items-center justify-between text-base font-bold text-navy">
                 <span>Gesamt</span>
-                <span>{formatPrice(totalCents)}</span>
+                <span>{formatDisplay(grandTotalCents)}</span>
               </div>
               <button
                 type="button"
@@ -306,9 +368,26 @@ export function CartDrawer() {
               ) : null}
             </div>
             <div className="border-t border-border px-5 py-5">
-              <div className="flex items-center justify-between text-base font-bold text-navy">
-                <span>Zu zahlen bei Lieferung</span>
-                <span>{formatPrice(totalCents)}</span>
+              <p className="mb-2 text-xs text-muted-foreground">
+                Versand: {countryLabel} · Zahlung per Rechnung (14 Tage)
+              </p>
+              <div className="space-y-1.5">
+                <div className="flex items-center justify-between text-sm text-muted-foreground">
+                  <span>Zwischensumme</span>
+                  <span>{formatDisplay(subtotalCents)}</span>
+                </div>
+                <div className="flex items-center justify-between text-sm text-muted-foreground">
+                  <span className="flex items-center gap-1.5">
+                    <Truck className="size-4" strokeWidth={1.8} /> Porto &amp; Verpackung
+                  </span>
+                  <span className={shippingCents === 0 ? "font-semibold text-health-green" : ""}>
+                    {shippingCents === 0 ? "Kostenlos" : formatDisplay(shippingCents)}
+                  </span>
+                </div>
+              </div>
+              <div className="mt-3 flex items-center justify-between border-t border-border pt-3 text-base font-bold text-navy">
+                <span>Rechnungsbetrag</span>
+                <span>{formatDisplay(grandTotalCents)}</span>
               </div>
               <button
                 type="submit"
@@ -337,7 +416,8 @@ export function CartDrawer() {
             <h2 className="mt-4 text-2xl font-extrabold text-navy">Bestellung erhalten!</h2>
             <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
               Vielen Dank – deine Bestellung <strong className="text-navy">{success}</strong> ist bei
-              uns eingegangen. Wir liefern schnellstmöglich, bezahlt wird bequem bei der Lieferung.
+              uns eingegangen. Wir liefern nach {countryLabel} und stellen dir die Rechnung mit
+              14 Tagen Zahlungsfrist zu.
             </p>
             <button
               type="button"

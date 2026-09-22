@@ -56,6 +56,7 @@ export const PRODUCTS: Product[] = [
       original3,
       original4,
       "/ChatGPT Image 11 Eyl 2026 23_34_48.png",
+      "/inhaltsstoffe-tabelle.png",
     ],
     video: videoOriginal,
     benefits: [
@@ -86,6 +87,7 @@ export const PRODUCTS: Product[] = [
       sachet10_3,
       sachet10_4,
       sachet10_5,
+      "/inhaltsstoffe-tabelle.png",
     ],
     video: videoSachets,
     benefits: [
@@ -116,6 +118,7 @@ export const PRODUCTS: Product[] = [
       sachet40_3,
       sachet40_4,
       sachet40_5,
+      "/inhaltsstoffe-tabelle.png",
     ],
     video: videoSachets,
     benefits: [

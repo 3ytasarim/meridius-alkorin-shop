@@ -10,8 +10,8 @@ export function Products() {
             Finde ALKORIN, das zu dir passt.
           </h2>
           <p className="mt-5 text-lg leading-relaxed text-muted-foreground">
-            Dieselbe bewährte Rezeptur – in Formaten, die sich deinem Tag anpassen. Bezahlt wird
-            bequem bei der Lieferung.
+            Dieselbe bewährte Rezeptur – in Formaten, die sich deinem Tag anpassen. Bequem auf
+            Rechnung kaufen, Versand innerhalb der Schweiz.
           </p>
         </div>
 

@@ -1,11 +1,13 @@
 import { Link } from "@tanstack/react-router";
 import { Check } from "lucide-react";
-import { formatPrice, type Product } from "@/lib/products";
+import type { Product } from "@/lib/products";
 import { useCart } from "@/lib/cart";
+import { formatPriceChf } from "@/lib/currency";
 import { AnimatedPrice } from "@/components/ui/animated-price";
 
 export function ProductCard({ product }: { product: Product }) {
   const { add } = useCart();
+  const formatPrice = formatPriceChf;
 
   return (
     <article className="group flex h-full flex-col overflow-hidden rounded-[22px] border border-border bg-card transition-shadow duration-300 hover:shadow-card">
@@ -84,7 +86,7 @@ export function ProductCard({ product }: { product: Product }) {
             In den Warenkorb
           </button>
           <p className="mt-2 text-center text-[11px] text-muted-foreground">
-            Zahlung bequem bei Lieferung
+            Kauf auf Rechnung
           </p>
         </div>
       </div>

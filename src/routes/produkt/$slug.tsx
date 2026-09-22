@@ -1,10 +1,12 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useState } from "react";
 import { Check, Minus, Plus, ShieldCheck, Truck, Wallet } from "lucide-react";
-import { PRODUCTS, formatPrice, getProduct } from "@/lib/products";
+import { PRODUCTS, getProduct } from "@/lib/products";
 import { ProductCard } from "@/components/shop/ProductCard";
+import { IngredientsTable } from "@/components/shop/IngredientsTable";
 import { AnimatedPrice } from "@/components/ui/animated-price";
 import { useCart } from "@/lib/cart";
+import { formatPriceChf } from "@/lib/currency";
 
 export const Route = createFileRoute("/produkt/$slug")({
   loader: ({ params }) => {
@@ -30,8 +32,8 @@ export const Route = createFileRoute("/produkt/$slug")({
 });
 
 const USPS = [
-  { icon: Truck, label: "Versand aus Deutschland" },
-  { icon: Wallet, label: "Zahlung bei Lieferung" },
+  { icon: Truck, label: "Versand innerhalb der Schweiz" },
+  { icon: Wallet, label: "Kauf auf Rechnung" },
   { icon: ShieldCheck, label: "Bewährte Rezeptur" },
 ];
 
@@ -39,6 +41,7 @@ function ProductPage() {
   const { slug } = Route.useParams();
   const product = getProduct(slug)!;
   const { add } = useCart();
+  const formatPrice = formatPriceChf;
   const [active, setActive] = useState(0);
   const [qty, setQty] = useState(1);
 
@@ -135,6 +138,12 @@ function ProductPage() {
                 ))}
               </ul>
 
+              {product.slug !== "kapseln" ? (
+                <div className="mt-7">
+                  <IngredientsTable />
+                </div>
+              ) : null}
+
               <div className="mt-7 flex flex-col gap-3 sm:flex-row">
                 <div className="flex h-13 items-center justify-between rounded-[11px] border border-border px-2 sm:w-36">
                   <button
@@ -182,7 +191,7 @@ function ProductPage() {
                   { title: "Inhaltsstoffe", body: product.ingredients },
                   {
                     title: "Versand & Zahlung",
-                    body: "Versand aus Deutschland. Die Zahlung erfolgt bequem bei der Lieferung (Nachnahme).",
+                    body: "Versand ausschliesslich innerhalb der Schweiz. Die Zahlung erfolgt bequem per Rechnung mit 14 Tagen Zahlungsfrist.",
                   },
                 ].map((row) => (
                   <details key={row.title} className="group py-4">

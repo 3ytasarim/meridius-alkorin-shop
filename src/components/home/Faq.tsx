@@ -4,28 +4,40 @@ import { BlurredStagger } from "@/components/ui/text-reveal-faqs";
 
 const FAQS = [
   {
-    q: "Was ist ALKORIN®?",
-    a: "ALKORIN® ist ein Nahrungsergänzungsmittel mit einer bewährten Rezeptur aus ausgewählten Vitaminen, Mineralstoffen und Cholin.",
+    q: "Wie wurde ALKORIN® entwickelt?",
+    a: "ALKORIN® wurde von Ärzten und Pharmakologen in jahrelanger Forschungsarbeit entwickelt – die Rezeptur wird dabei kontinuierlich verbessert, um den bestmöglichen Support für den Körper zu bieten.",
   },
   {
-    q: "Wie wird ALKORIN® verwendet?",
-    a: "Das Pulver wird abgemessen bzw. als Sachet geöffnet und in ein Glas Wasser eingerührt. Bitte beachte die Verzehrempfehlung auf der Verpackung.",
+    q: "Wo wird ALKORIN® hergestellt?",
+    a: "Das Produkt ist ein österreichisches Qualitätsprodukt und wird in einem HACCP-zertifizierten Pharmaunternehmen in Österreich produziert und kontrolliert.",
   },
   {
-    q: "Wann wird ALKORIN® eingenommen?",
-    a: "ALKORIN® lässt sich flexibel in den Tagesablauf einbauen. Die genaue Empfehlung findest du auf der Produktverpackung.",
+    q: "In welchen Darreichungsformen ist ALKORIN® erhältlich?",
+    a: "Derzeit können Sie ALKORIN® im 100 g Beutel als praktisches Sachet oder in Kapselform erwerben. Unser Forschungsteam arbeitet aktuell an einer neuen Darreichungsform, die bald erhältlich sein wird.",
   },
   {
-    q: "Welche Inhaltsstoffe enthält ALKORIN®?",
-    a: "Die Rezeptur enthält unter anderem Cholin sowie ausgewählte Vitamine und Mineralstoffe. Die vollständige Zusammensetzung steht auf dem Etikett.",
+    q: "Was enthält eine Portion ALKORIN® (4 g)?",
+    a: "Eine Portion (4 g) enthält: Magnesium 375 mg, Cholin 200 mg, Vitamin C 80 mg, Natrium 100 mg, Vitamin B6 4,2 mg, Thiamin 3,3 mg, Riboflavin 5,3 mg, Niacin 14,4 mg, Pantothensäure 5,4 mg, Zink 10 mg, Folsäure 240 µg, Vitamin B12 9 µg. Die genauen Dosierungen sind sorgfältig auf die Bedürfnisse des Körpers abgestimmt.",
   },
   {
-    q: "Welche Produktvarianten gibt es?",
-    a: "ALKORIN® ist als Pulverdose und als Sachets für unterwegs erhältlich; weitere Formate findest du im Shop.",
+    q: "Wie wird ALKORIN® eingenommen?",
+    a: "Lösen Sie eine Portion (4 g) in ¼ Liter Wasser auf und nehmen Sie das Getränk vor dem Schlafengehen ein. Bitte überschreiten Sie dabei nicht die empfohlene Tagesdosis.",
   },
   {
-    q: "Wo kann ich ALKORIN® kaufen?",
-    a: "Direkt hier im Onlineshop. Der Versand innerhalb Deutschlands ist kostenfrei.",
+    q: "Wo kann ich ALKORIN® erwerben?",
+    a: "Direkt hier in unserem Onlineshop – Versand innerhalb der Schweiz, Kauf bequem auf Rechnung mit 14 Tagen Zahlungsfrist.",
+  },
+  {
+    q: "Kann ich ALKORIN® auch in größeren Mengen als Unternehmen oder Wiederverkäufer bestellen?",
+    a: "Ja – bei Interesse an größeren Bestellungen für Firmen oder Wiederverkäufer wenden Sie sich bitte direkt an unser Team über unsere Kontaktseite.",
+  },
+  {
+    q: "Sind die Inhaltsstoffe und die Rezeptur wissenschaftlich fundiert?",
+    a: "Ja, ALKORIN® wurde von Experten entwickelt und basiert auf langjähriger Forschungsarbeit. Die Rezeptur wird ständig weiter optimiert, um die Wirksamkeit und Verträglichkeit der Inhaltsstoffe zu gewährleisten.",
+  },
+  {
+    q: "Gibt es Hinweise zur Verträglichkeit oder mögliche Nebenwirkungen?",
+    a: "ALKORIN® ist als Nahrungsergänzungsmittel konzipiert und unterstützt den Körper in Zeiten erhöhter Belastung. Dennoch empfehlen wir, die angegebene Tagesdosis nicht zu überschreiten. Magnesium kann bei übermäßigem Konsum abführend wirken. Bei bestehenden gesundheitlichen Bedenken oder Vorerkrankungen sollten Sie vor der Einnahme Ihren Arzt konsultieren.",
   },
 ];
 
@@ -55,7 +67,7 @@ export function Faq() {
           src="/ChatGPT Image 12 Eyl 2026 00_04_51.png"
           alt="ALKORIN® Produktfamilie auf einer Küchentheke"
           loading="lazy"
-          className="aspect-[4/5] w-full shrink-0 rounded-[22px] object-cover shadow-card md:aspect-auto md:max-w-md md:self-stretch"
+          className="aspect-[4/5] w-full shrink-0 rounded-[22px] object-cover object-[30%_center] shadow-card md:aspect-auto md:max-w-md md:self-stretch"
         />
 
         <div className="w-full">
@@ -105,7 +117,7 @@ export function Faq() {
                   </div>
                   <div
                     className={`overflow-hidden transition-all duration-500 ease-in-out ${
-                      open ? "mt-3 max-h-[300px] translate-y-0" : "max-h-0 -translate-y-2"
+                      open ? "mt-3 max-h-[420px] translate-y-0" : "max-h-0 -translate-y-2"
                     }`}
                   >
                     <BlurredStagger text={f.a} show={open} />

@@ -41,8 +41,8 @@ const VALUES = [
     iconBg: "var(--soft-blue)",
   },
   {
-    title: "Aus Deutschland",
-    text: "Versand aus Deutschland, Zahlung bequem bei der Lieferung.",
+    title: "Aus der Schweiz",
+    text: "Versand innerhalb der Schweiz, Kauf bequem auf Rechnung.",
     icon: Truck,
     accent: "var(--health-yellow)",
     iconBg: "color-mix(in oklab, var(--health-yellow) 16%, white)",

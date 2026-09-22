@@ -17,7 +17,8 @@ import {
 } from "@/components/ui/navigation-menu";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { useCart } from "@/lib/cart";
-import { formatPrice, PRODUCTS } from "@/lib/products";
+import { formatPriceChf } from "@/lib/currency";
+import { PRODUCTS } from "@/lib/products";
 
 // Struktur 1:1 nach 21st.dev shadcnblocks-com-navbar1 (NavigationMenu-Trigger/
 // Content für Dropdowns, Sheet+Accordion mobil) – Inhalte & Auth-Slot durch
@@ -38,6 +39,7 @@ const iconBtn =
 
 export function Header() {
   const cart = useCart();
+  const formatPrice = formatPriceChf;
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const [open, setOpen] = useState(false);
 
@@ -64,11 +66,11 @@ export function Header() {
           {/* Logo — left, bündig mit dem Container-Inhalt (z.B. "Bereit für morgen.") */}
           <Link to="/" aria-label="Alkorin – zur Startseite" className="shrink-0">
             <img
-              src="/Meridius_Logo.png"
+              src="/Meridius_Logo_Dark_Header.png"
               alt="Meridius"
-              width={2172}
-              height={724}
-              className="h-16 w-auto lg:h-24"
+              width={2008}
+              height={378}
+              className="h-12 w-auto lg:h-16"
             />
           </Link>
 
@@ -171,7 +173,7 @@ export function Header() {
                 <SheetHeader>
                   <SheetTitle>
                     <Link to="/" onClick={() => setOpen(false)} className="flex items-center">
-                      <img src="/Meridius_Logo.png" alt="Meridius" className="h-10 w-auto" />
+                      <img src="/Meridius_Logo_Dark_Header.png" alt="Meridius" className="h-10 w-auto" />
                     </Link>
                   </SheetTitle>
                 </SheetHeader>

@@ -21,7 +21,6 @@ import { Route as KontaktRouteImport } from './routes/kontakt'
 import { Route as ShopRouteImport } from './routes/shop'
 import { Route as UeberUnsRouteImport } from './routes/ueber-uns'
 import { Route as WarenkorbRouteImport } from './routes/warenkorb'
-import { Route as WiderrufRouteImport } from './routes/widerruf'
 import { Route as WissenRouteImport } from './routes/wissen'
 import { Route as ProduktSlugRouteImport } from './routes/produkt/$slug'
 
@@ -85,11 +84,6 @@ const WarenkorbRoute = WarenkorbRouteImport.update({
   path: '/warenkorb',
   getParentRoute: () => rootRouteImport,
 } as any)
-const WiderrufRoute = WiderrufRouteImport.update({
-  id: '/widerruf',
-  path: '/widerruf',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const WissenRoute = WissenRouteImport.update({
   id: '/wissen',
   path: '/wissen',
@@ -114,7 +108,6 @@ export interface FileRoutesByFullPath {
   '/shop': typeof ShopRoute
   '/ueber-uns': typeof UeberUnsRoute
   '/warenkorb': typeof WarenkorbRoute
-  '/widerruf': typeof WiderrufRoute
   '/wissen': typeof WissenRoute
   '/produkt/$slug': typeof ProduktSlugRoute
 }
@@ -131,7 +124,6 @@ export interface FileRoutesByTo {
   '/shop': typeof ShopRoute
   '/ueber-uns': typeof UeberUnsRoute
   '/warenkorb': typeof WarenkorbRoute
-  '/widerruf': typeof WiderrufRoute
   '/wissen': typeof WissenRoute
   '/produkt/$slug': typeof ProduktSlugRoute
 }
@@ -149,7 +141,6 @@ export interface FileRoutesById {
   '/shop': typeof ShopRoute
   '/ueber-uns': typeof UeberUnsRoute
   '/warenkorb': typeof WarenkorbRoute
-  '/widerruf': typeof WiderrufRoute
   '/wissen': typeof WissenRoute
   '/produkt/$slug': typeof ProduktSlugRoute
 }
@@ -168,7 +159,6 @@ export interface FileRouteTypes {
     | '/shop'
     | '/ueber-uns'
     | '/warenkorb'
-    | '/widerruf'
     | '/wissen'
     | '/produkt/$slug'
   fileRoutesByTo: FileRoutesByTo
@@ -185,7 +175,6 @@ export interface FileRouteTypes {
     | '/shop'
     | '/ueber-uns'
     | '/warenkorb'
-    | '/widerruf'
     | '/wissen'
     | '/produkt/$slug'
   id:
@@ -202,7 +191,6 @@ export interface FileRouteTypes {
     | '/shop'
     | '/ueber-uns'
     | '/warenkorb'
-    | '/widerruf'
     | '/wissen'
     | '/produkt/$slug'
   fileRoutesById: FileRoutesById
@@ -220,7 +208,6 @@ export interface RootRouteChildren {
   ShopRoute: typeof ShopRoute
   UeberUnsRoute: typeof UeberUnsRoute
   WarenkorbRoute: typeof WarenkorbRoute
-  WiderrufRoute: typeof WiderrufRoute
   WissenRoute: typeof WissenRoute
   ProduktSlugRoute: typeof ProduktSlugRoute
 }
@@ -311,13 +298,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof WarenkorbRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/widerruf': {
-      id: '/widerruf'
-      path: '/widerruf'
-      fullPath: '/widerruf'
-      preLoaderRoute: typeof WiderrufRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/wissen': {
       id: '/wissen'
       path: '/wissen'
@@ -348,7 +328,6 @@ const rootRouteChildren: RootRouteChildren = {
   ShopRoute: ShopRoute,
   UeberUnsRoute: UeberUnsRoute,
   WarenkorbRoute: WarenkorbRoute,
-  WiderrufRoute: WiderrufRoute,
   WissenRoute: WissenRoute,
   ProduktSlugRoute: ProduktSlugRoute,
 }

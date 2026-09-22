@@ -1,17 +1,20 @@
 import { useEffect, useRef, useState } from "react";
 import { animate, useMotionValue } from "motion/react";
-import { formatPrice } from "@/lib/products";
+import { formatChf, toChfCents } from "@/lib/currency";
 
 export function AnimatedPrice({
   cents,
   className,
 }: {
+  /** Originalpreis in EUR-Cent – wird intern in CHF umgerechnet. */
   cents: number;
   className?: string;
 }) {
+  const format = formatChf;
   const ref = useRef<HTMLSpanElement>(null);
   const [started, setStarted] = useState(false);
-  const startCents = cents + 1500;
+  const displayCents = toChfCents(cents);
+  const startCents = displayCents + 1500;
   const value = useMotionValue(startCents);
 
   useEffect(() => {
@@ -30,20 +33,20 @@ export function AnimatedPrice({
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    el.textContent = formatPrice(startCents);
-  }, [startCents]);
+    el.textContent = format(startCents);
+  }, [startCents, format]);
 
   useEffect(() => {
     if (!started) return;
-    const controls = animate(value, cents, {
+    const controls = animate(value, displayCents, {
       duration: 0.9,
       ease: [0.16, 1, 0.3, 1],
       onUpdate: (latest) => {
-        if (ref.current) ref.current.textContent = formatPrice(Math.round(latest));
+        if (ref.current) ref.current.textContent = format(Math.round(latest));
       },
     });
     return () => controls.stop();
-  }, [started, cents, value]);
+  }, [started, displayCents, format, value]);
 
   return <span ref={ref} className={className} />;
 }

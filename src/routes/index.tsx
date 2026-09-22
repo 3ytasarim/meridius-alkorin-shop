@@ -11,7 +11,7 @@ import { Faq } from "@/components/home/Faq";
 
 const TITLE = "ALKORIN® – Bewährte Rezeptur für deine Abendroutine";
 const DESCRIPTION =
-  "ALKORIN® verbindet ausgewählte Vitamine, Mineralstoffe und Cholin in einer unkomplizierten Routine. Als Pulver oder Sachets – Zahlung bei Lieferung, Versand aus Deutschland.";
+  "ALKORIN® verbindet ausgewählte Vitamine, Mineralstoffe und Cholin in einer unkomplizierten Routine. Als Pulver oder Sachets – Kauf auf Rechnung, Versand innerhalb der Schweiz.";
 
 export const Route = createFileRoute("/")({
   head: () => ({

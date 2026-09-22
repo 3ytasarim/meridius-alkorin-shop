@@ -5,9 +5,9 @@ export const Route = createFileRoute("/shop")({
   head: () => ({
     meta: [
       { title: "Shop | ALKORIN®" },
-      { name: "description", content: "Alle ALKORIN® Produkte im Überblick – Zahlung bei Lieferung." },
+      { name: "description", content: "Alle ALKORIN® Produkte im Überblick – Kauf auf Rechnung." },
       { property: "og:title", content: "Shop | ALKORIN®" },
-      { property: "og:description", content: "Alle ALKORIN® Produkte im Überblick – Zahlung bei Lieferung." },
+      { property: "og:description", content: "Alle ALKORIN® Produkte im Überblick – Kauf auf Rechnung." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
