@@ -43,9 +43,8 @@ export function Footer() {
     <footer className="relative z-10 mt-8 w-full overflow-hidden pt-16 pb-8">
       <style>{`
         .footer-glass {
-          backdrop-filter: blur(3px) saturate(180%);
-          background: radial-gradient(circle, color-mix(in oklab, var(--card) 96%, transparent) 0%, color-mix(in oklab, var(--soft-green) 75%, transparent) 60%, var(--soft-green) 100%);
-          border: 1px solid color-mix(in oklab, var(--health-green) 16%, transparent);
+          background: #c6dae3;
+          border: 1px solid color-mix(in oklab, var(--navy) 12%, transparent);
         }
       `}</style>
 
@@ -63,14 +62,14 @@ export function Footer() {
               alt="Meridius"
               width={2008}
               height={378}
-              className="h-12 w-auto"
+              className="h-12 w-auto [filter:drop-shadow(0_0_1px_#2c4160)_drop-shadow(0_0_2px_#2c4160)_drop-shadow(0_1px_2px_rgba(44,65,96,0.6))]"
             />
           </Link>
-          <p className="mb-6 max-w-xs text-center text-sm text-navy/70 md:text-left">
+          <p className="mb-6 max-w-xs text-center text-sm text-navy/80 md:text-left">
             Eine bewährte Rezeptur mit ausgewählten Vitaminen, Mineralstoffen und Cholin – für
             bewusste Menschen und ihren Alltag.
           </p>
-          <div className="mt-2 flex gap-3 text-health-blue">
+          <div className="mt-2 flex gap-3 text-navy/80">
             <a href="#" aria-label="Instagram" className="transition hover:text-navy">
               <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.98-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM12 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
@@ -92,13 +91,13 @@ export function Footer() {
         <nav className="flex w-full flex-col gap-9 text-center md:w-auto md:flex-row md:justify-end md:text-left">
           {NAV.map((col) => (
             <div key={col.title}>
-              <div className="mb-3 text-xs font-semibold tracking-widest text-health-blue uppercase">
+              <div className="mb-3 text-xs font-semibold tracking-widest text-navy uppercase">
                 {col.title}
               </div>
               <ul className="space-y-2">
                 {col.links.map((link) => (
                   <li key={link.label}>
-                    <Link to={link.to} className="text-navy/70 transition hover:text-navy">
+                    <Link to={link.to} className="text-navy/85 transition hover:text-navy hover:underline">
                       {link.label}
                     </Link>
                   </li>
