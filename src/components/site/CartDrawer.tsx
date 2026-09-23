@@ -75,6 +75,8 @@ export function CartDrawer() {
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
   const [success, setSuccess] = useState<string | null>(null);
+  const [accepted, setAccepted] = useState(false);
+  const [acceptError, setAcceptError] = useState(false);
 
   const set = (k: keyof Fields) => (e: React.ChangeEvent<HTMLInputElement>) => {
     setFields((f) => ({ ...f, [k]: e.target.value }));
@@ -95,7 +97,8 @@ export function CartDrawer() {
       next.email = "Bitte gib eine gültige E-Mail-Adresse ein.";
     }
     setFieldErrors(next);
-    return Object.keys(next).length === 0;
+    setAcceptError(!accepted);
+    return Object.keys(next).length === 0 && accepted;
   };
 
   const submit = async (e: React.FormEvent) => {
@@ -119,6 +122,8 @@ export function CartDrawer() {
       clear();
       setFields(EMPTY);
       setFieldErrors({});
+      setAccepted(false);
+      setAcceptError(false);
       setStep("cart");
       setOpen(false);
     } catch {
@@ -360,6 +365,47 @@ export function CartDrawer() {
                 value={fields.note}
                 onChange={set("note")}
               />
+              <div>
+                <label className="flex cursor-pointer items-start gap-3 text-sm leading-snug text-foreground/85">
+                  <input
+                    type="checkbox"
+                    checked={accepted}
+                    onChange={(e) => {
+                      setAccepted(e.target.checked);
+                      if (e.target.checked) setAcceptError(false);
+                    }}
+                    aria-invalid={acceptError}
+                    className="mt-0.5 size-5 shrink-0 cursor-pointer accent-[var(--navy)]"
+                  />
+                  <span>
+                    Hiermit akzeptiere ich die{" "}
+                    <a
+                      href="/agb"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-semibold text-navy underline underline-offset-2"
+                    >
+                      AGB
+                    </a>{" "}
+                    und die{" "}
+                    <a
+                      href="/datenschutz"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-semibold text-navy underline underline-offset-2"
+                    >
+                      Datenschutzbestimmungen
+                    </a>
+                    .
+                  </span>
+                </label>
+                {acceptError ? (
+                  <p className="mt-1 flex items-center gap-1 text-xs font-medium text-destructive">
+                    <AlertCircle className="size-3.5 shrink-0" />
+                    Bitte akzeptiere die AGB und die Datenschutzbestimmungen, um zu bestellen.
+                  </p>
+                ) : null}
+              </div>
               {error ? (
                 <p className="flex items-start gap-2 rounded-[10px] bg-destructive/10 px-3 py-2.5 text-sm font-medium text-destructive">
                   <AlertCircle className="mt-0.5 size-4 shrink-0" />

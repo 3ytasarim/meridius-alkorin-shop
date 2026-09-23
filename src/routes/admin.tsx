@@ -169,10 +169,16 @@ function AdminPage() {
           <AdminLoginBackground />
         </div>
 
-        <div className="relative z-10 flex w-full max-w-[400px] flex-col items-center rounded-xl border border-border bg-card p-8 text-center shadow-2xl">
-          <img src="/Meridius_Logo.png" alt="Meridius" className="mb-3 h-16 w-auto" />
-          <h1 className="text-[1.35rem] font-bold tracking-tight text-navy">Admin-Anmeldung</h1>
-          <p className="mb-4 mt-1 text-[0.85rem] leading-relaxed text-muted-foreground">
+        <div className="relative z-10 flex w-full max-w-[400px] flex-col items-center rounded-xl bg-[#415a78] p-8 text-center shadow-2xl">
+          <img
+            src="/Meridius_Logo_Dark_Header.png"
+            alt="Meridius"
+            width={2008}
+            height={378}
+            className="mb-5 h-12 w-auto"
+          />
+          <h1 className="text-[1.35rem] font-bold tracking-tight text-white">Admin-Anmeldung</h1>
+          <p className="mb-4 mt-1 text-[0.85rem] leading-relaxed text-white/80">
             Bitte melde dich mit deinem Benutzernamen an.
           </p>
 
@@ -203,7 +209,7 @@ function AdminPage() {
                 {showPassword ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
               </button>
             </div>
-            {error ? <p className="text-sm font-medium text-destructive">{error}</p> : null}
+            {error ? <p className="text-sm font-medium text-red-200">{error}</p> : null}
             <button className="h-11 w-full rounded-md bg-gradient-to-r from-health-green to-health-yellow text-sm font-semibold text-navy transition-transform hover:scale-[1.02] active:scale-[0.99]">
               Anmelden
             </button>
@@ -219,7 +225,7 @@ function AdminPage() {
         <div>
           <h1 className="text-3xl font-extrabold text-navy">Bestellungen</h1>
           <p className="mt-1 text-sm text-muted-foreground">
-            Kapıda ödeme – alle eingegangenen Bestellungen.
+            Alle eingegangenen Bestellungen.
           </p>
         </div>
         <button

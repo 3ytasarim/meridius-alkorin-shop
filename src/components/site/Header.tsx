@@ -34,8 +34,8 @@ const NAV = [
   { title: "FAQ", to: "/faq" },
 ] as const;
 
-const iconBtn =
-  "grid size-12 place-items-center rounded-md text-foreground/80 transition-colors hover:bg-soft-blue hover:text-navy";
+const iconBtnBase =
+  "grid size-12 place-items-center rounded-md transition-colors hover:bg-soft-blue hover:text-navy";
 
 export function Header() {
   const cart = useCart();
@@ -49,7 +49,8 @@ export function Header() {
   // und scrollt mit der Seite weg; per negativem Margin schiebt sie sich beim
   // ersten Laden trotzdem über das Hero-Bild (siehe -mb-* unten).
   const transparentHero = (pathname === "/" || pathname === "/alkorin") && !open;
-  const navLinkColor = "text-navy";
+  const navLinkColor = transparentHero ? "text-navy" : "text-white";
+  const iconBtn = `${iconBtnBase} ${transparentHero ? "text-foreground/80" : "text-white"}`;
 
   return (
     <header
@@ -59,7 +60,7 @@ export function Header() {
     >
       <div
         className={`relative transition-colors duration-300 ${
-          transparentHero ? "bg-transparent" : "bg-health-yellow/35 backdrop-blur-md"
+          transparentHero ? "bg-transparent" : "bg-[#415a78]"
         }`}
       >
         <div className="container-alkorin flex h-20 items-center gap-6 lg:h-24">
@@ -124,8 +125,8 @@ export function Header() {
                       <NavigationMenuLink asChild>
                         <Link
                           to={item.to}
-                          className={`relative inline-flex h-11 w-max items-center justify-center whitespace-nowrap rounded-md px-4 text-[1.25rem] font-bold transition-colors after:absolute after:-bottom-1 after:left-4 after:right-4 after:h-[2px] after:rounded-full after:bg-navy after:opacity-0 after:transition-opacity hover:bg-soft-blue hover:text-navy ${navLinkColor}`}
-                          activeProps={{ className: "text-navy" }}
+                          className={`relative inline-flex h-11 w-max items-center justify-center whitespace-nowrap rounded-md px-4 text-[1.25rem] font-bold transition-colors after:absolute after:-bottom-1 after:left-4 after:right-4 after:h-[2px] after:rounded-full after:bg-current after:opacity-0 after:transition-opacity hover:bg-soft-blue hover:text-navy ${navLinkColor}`}
+                          activeProps={{ className: transparentHero ? "text-navy" : "text-white" }}
                         >
                           {item.title}
                         </Link>
