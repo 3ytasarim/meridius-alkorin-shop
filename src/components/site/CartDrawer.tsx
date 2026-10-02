@@ -2,6 +2,7 @@ import { useState } from "react";
 import {
   AlertCircle,
   Minus,
+  Percent,
   Plus,
   ShoppingBag,
   Trash2,
@@ -21,6 +22,9 @@ const EUR_FORMATTER = new Intl.NumberFormat("de-DE", { style: "currency", curren
 /** Porto & Verpackung: 6.- (CHF bzw. EUR je nach Land), gratis ab 100.- Warenwert. */
 const SHIPPING_FEE_CENTS = 600;
 const FREE_SHIPPING_THRESHOLD_CENTS = 10000;
+
+/** Schweizer MWST-Satz (Stand 2026). Preise sind inkl. MWST ausgezeichnet. */
+const VAT_RATE = 0.081;
 
 type Fields = {
   firstName: string;
@@ -68,6 +72,9 @@ export function CartDrawer() {
   const shippingCents =
     subtotalCents >= FREE_SHIPPING_THRESHOLD_CENTS ? 0 : SHIPPING_FEE_CENTS;
   const grandTotalCents = subtotalCents + shippingCents;
+  // MWST wird nur auf den Warenwert (Zwischensumme) berechnet, nicht auf den Versand.
+  const vatCents = Math.round(subtotalCents - subtotalCents / (1 + VAT_RATE));
+  const nettoCents = subtotalCents - vatCents;
 
   const [step, setStep] = useState<"cart" | "form">("cart");
   const [fields, setFields] = useState<Fields>(EMPTY);
@@ -109,7 +116,7 @@ export function CartDrawer() {
     try {
       const shippingLabel =
         shippingCents === 0 ? "kostenlos" : `${formatDisplay(shippingCents)} Versandkosten`;
-      const currencyNote = `Land: ${countryLabel} – Zwischensumme ${formatDisplay(subtotalCents)}, Versand ${shippingLabel}, Gesamt ${formatDisplay(grandTotalCents)}`;
+      const currencyNote = `Land: ${countryLabel} – Zwischensumme ${formatDisplay(subtotalCents)} (Netto ${formatDisplay(nettoCents)} + ${formatDisplay(vatCents)} MWST 8.1%), Versand ${shippingLabel}, Gesamt ${formatDisplay(grandTotalCents)}`;
       const note = [currencyNote, fields.note.trim()].filter(Boolean).join(" · ");
       const res = await createOrder({
         data: {
@@ -260,6 +267,13 @@ export function CartDrawer() {
                 <div className="flex items-center justify-between text-sm text-muted-foreground">
                   <span>Zwischensumme</span>
                   <span>{formatDisplay(subtotalCents)}</span>
+                </div>
+                <div className="flex items-center justify-between gap-2 rounded-[10px] bg-gradient-to-r from-soft-blue to-soft-blue/30 px-3 py-2 text-xs font-bold text-health-blue ring-1 ring-inset ring-health-blue/25">
+                  <span className="flex items-center gap-1.5">
+                    <Percent className="size-3.5 shrink-0" strokeWidth={2.6} />
+                    Netto {formatDisplay(nettoCents)} · zzgl. 8.1% MWST
+                  </span>
+                  <span>{formatDisplay(vatCents)}</span>
                 </div>
                 <div className="flex items-center justify-between text-sm text-muted-foreground">
                   <span className="flex items-center gap-1.5">
@@ -421,6 +435,13 @@ export function CartDrawer() {
                 <div className="flex items-center justify-between text-sm text-muted-foreground">
                   <span>Zwischensumme</span>
                   <span>{formatDisplay(subtotalCents)}</span>
+                </div>
+                <div className="flex items-center justify-between gap-2 rounded-[10px] bg-gradient-to-r from-soft-blue to-soft-blue/30 px-3 py-2 text-xs font-bold text-health-blue ring-1 ring-inset ring-health-blue/25">
+                  <span className="flex items-center gap-1.5">
+                    <Percent className="size-3.5 shrink-0" strokeWidth={2.6} />
+                    Netto {formatDisplay(nettoCents)} · zzgl. 8.1% MWST
+                  </span>
+                  <span>{formatDisplay(vatCents)}</span>
                 </div>
                 <div className="flex items-center justify-between text-sm text-muted-foreground">
                   <span className="flex items-center gap-1.5">

@@ -44,7 +44,7 @@ export const PRODUCTS: Product[] = [
     tagline: "Das bewährte Pulver",
     descriptor:
       "Pulver, 100 g Dose – die klassische Rezeptur mit Zitronengeschmack. Vor dem Schlafengehen einnehmen.",
-    priceCents: 2990,
+    priceCents: 1990,
     compareAtCents: null,
     unit: "100 g",
     servings: "ca. 25 Portionen",
@@ -75,7 +75,7 @@ export const PRODUCTS: Product[] = [
     tagline: "Für unterwegs",
     descriptor:
       "10 Einzelportionen Pulver – vorportioniert für unterwegs, ohne Abmessen.",
-    priceCents: 1990,
+    priceCents: 1490,
     compareAtCents: null,
     unit: "10 Portionen",
     servings: "10 Einzelportionen",
@@ -106,7 +106,7 @@ export const PRODUCTS: Product[] = [
     tagline: "Vorratspackung",
     descriptor:
       "40 Einzelportionen Pulver – die Vorratsgröße für deine durchgehende Routine.",
-    priceCents: 6490,
+    priceCents: 4990,
     compareAtCents: null,
     unit: "40 Portionen",
     servings: "40 Einzelportionen",
@@ -137,7 +137,7 @@ export const PRODUCTS: Product[] = [
     tagline: "Kompakt & unkompliziert",
     descriptor:
       "60 Kapseln (45 g) – die kompakte Alternative, wenn es ohne Anrühren sein soll.",
-    priceCents: 2790,
+    priceCents: 1990,
     compareAtCents: null,
     unit: "60 Kapseln",
     servings: "ca. 30 Tage",
