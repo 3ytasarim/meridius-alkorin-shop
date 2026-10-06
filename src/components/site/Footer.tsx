@@ -1,4 +1,6 @@
 import { Link } from "@tanstack/react-router";
+import { Sparkle } from "lucide-react";
+import { TextGradient } from "@/components/ui/text-gradient";
 
 const NAV = [
   {
@@ -107,8 +109,25 @@ export function Footer() {
           ))}
         </nav>
       </div>
-      <div className="relative z-10 mt-10 text-center text-xs text-navy/70">
+      <div className="relative z-10 mt-10 flex flex-col items-center justify-between gap-3 text-xs text-navy/70 sm:flex-row">
         <span>© {new Date().getFullYear()} ALKORIN®. Alle Rechte vorbehalten.</span>
+        <a
+          href="https://bleibsichtbar.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.18em] transition-opacity hover:opacity-80"
+        >
+          <Sparkle className="size-3 text-health-blue" aria-hidden />
+          <TextGradient
+            as="span"
+            children="Design by Bleibsichtbar.com"
+            colors={["#2563eb", "#38bdf8", "#22d3ee", "#2563eb"]}
+            duration={5}
+            angle={90}
+            className="font-semibold"
+          />
+          <Sparkle className="size-3 text-health-blue" aria-hidden />
+        </a>
       </div>
       </div>
     </footer>
