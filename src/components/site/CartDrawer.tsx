@@ -52,6 +52,7 @@ const REQUIRED_FIELDS: { key: keyof Fields; label: string }[] = [
   { key: "firstName", label: "Vorname" },
   { key: "lastName", label: "Nachname" },
   { key: "phone", label: "Telefon" },
+  { key: "email", label: "E-Mail" },
   { key: "street", label: "Straße und Hausnummer" },
   { key: "zip", label: "PLZ" },
   { key: "city", label: "Ort" },
@@ -337,7 +338,7 @@ export function CartDrawer() {
               <div>
                 <input
                   type="email"
-                  placeholder="E-Mail (optional)"
+                  placeholder="E-Mail"
                   className={inputClass(!!fieldErrors.email)}
                   value={fields.email}
                   onChange={set("email")}

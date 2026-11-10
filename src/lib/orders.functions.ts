@@ -42,7 +42,7 @@ const orderSchema = z.object({
   firstName: z.string().trim().min(2).max(60),
   lastName: z.string().trim().min(2).max(60),
   phone: z.string().trim().min(6).max(30),
-  email: z.string().trim().email().max(120).optional().or(z.literal("")),
+  email: z.string().trim().email().max(120),
   street: z.string().trim().min(4).max(160),
   zip: z.string().trim().min(3).max(12),
   city: z.string().trim().min(2).max(80),
