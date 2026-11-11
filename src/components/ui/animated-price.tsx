@@ -6,7 +6,7 @@ export function AnimatedPrice({
   cents,
   className,
 }: {
-  /** Originalpreis in EUR-Cent – wird intern in CHF umgerechnet. */
+  /** Preis in Rappen (CHF). */
   cents: number;
   className?: string;
 }) {

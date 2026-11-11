@@ -15,11 +15,9 @@ import { useCart } from "@/lib/cart";
 import { formatChf, toChfCents } from "@/lib/currency";
 import { createOrder } from "@/lib/orders.functions";
 
-type Country = "CH" | "DE";
-const COUNTRY_LABEL: Record<Country, string> = { CH: "Schweiz", DE: "Deutschland" };
-const EUR_FORMATTER = new Intl.NumberFormat("de-DE", { style: "currency", currency: "EUR" });
+const COUNTRY_LABEL = "Schweiz";
 
-/** Porto & Verpackung: 6.- (CHF bzw. EUR je nach Land), gratis ab 100.- Warenwert. */
+/** Porto & Verpackung: CHF 6.-, gratis ab CHF 100.- Warenwert. Lieferung nur in die Schweiz. */
 const SHIPPING_FEE_CENTS = 600;
 const FREE_SHIPPING_THRESHOLD_CENTS = 10000;
 
@@ -62,14 +60,11 @@ const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export function CartDrawer() {
   const { items, count, totalCents, open, setOpen, setQty, remove, clear } = useCart();
-  const [country, setCountry] = useState<Country>("CH");
-  const countryLabel = COUNTRY_LABEL[country];
-  const formatPrice = (eurCents: number) =>
-    country === "CH" ? formatChf(toChfCents(eurCents)) : EUR_FORMATTER.format(eurCents / 100);
-  const formatDisplay = (displayCents: number) =>
-    country === "CH" ? formatChf(displayCents) : EUR_FORMATTER.format(displayCents / 100);
+  const countryLabel = COUNTRY_LABEL;
+  const formatPrice = (cents: number) => formatChf(toChfCents(cents));
+  const formatDisplay = formatChf;
 
-  const subtotalCents = country === "CH" ? toChfCents(totalCents) : totalCents;
+  const subtotalCents = toChfCents(totalCents);
   const shippingCents =
     subtotalCents >= FREE_SHIPPING_THRESHOLD_CENTS ? 0 : SHIPPING_FEE_CENTS;
   const grandTotalCents = subtotalCents + shippingCents;
@@ -251,19 +246,6 @@ export function CartDrawer() {
                 <Wallet className="size-4" strokeWidth={1.8} /> Kauf auf Rechnung – 14 Tage
                 Zahlungsfrist
               </p>
-              <label className="mt-4 block">
-                <span className="mb-1.5 block text-xs font-semibold text-muted-foreground">
-                  Lieferland
-                </span>
-                <select
-                  value={country}
-                  onChange={(e) => setCountry(e.target.value as Country)}
-                  className="h-11 w-full rounded-[10px] border border-border bg-background px-3 text-sm font-medium text-foreground outline-none transition-colors focus:border-navy"
-                >
-                  <option value="CH">Schweiz (CHF)</option>
-                  <option value="DE">Deutschland (EUR)</option>
-                </select>
-              </label>
               <div className="mt-4 space-y-2 border-t border-border pt-4">
                 <div className="flex items-center justify-between text-sm text-muted-foreground">
                   <span>Zwischensumme</span>

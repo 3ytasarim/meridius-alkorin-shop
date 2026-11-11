@@ -21,7 +21,7 @@ import {
   type OrderRow,
   type OrderStatus,
 } from "@/lib/orders.functions";
-import { formatPrice } from "@/lib/products";
+import { formatChf as formatPrice } from "@/lib/currency";
 import { AdminLoginBackground } from "@/components/site/AdminLoginBackground";
 
 const ymd = (d: Date) => format(d, "yyyy-MM-dd");

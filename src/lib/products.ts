@@ -165,9 +165,3 @@ export const PRODUCTS: Product[] = [
 export function getProduct(slug: string) {
   return PRODUCTS.find((p) => p.slug === slug) ?? null;
 }
-
-export function formatPrice(cents: number) {
-  return new Intl.NumberFormat("de-DE", { style: "currency", currency: "EUR" }).format(
-    cents / 100,
-  );
-}
