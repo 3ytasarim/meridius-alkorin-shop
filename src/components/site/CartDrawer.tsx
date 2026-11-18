@@ -14,15 +14,9 @@ import {
 import { useCart } from "@/lib/cart";
 import { formatChf, toChfCents } from "@/lib/currency";
 import { createOrder } from "@/lib/orders.functions";
+import { FREE_SHIPPING_THRESHOLD_CENTS, calcTotals } from "@/lib/pricing";
 
 const COUNTRY_LABEL = "Schweiz";
-
-/** Porto & Verpackung: CHF 6.-, gratis ab CHF 100.- Warenwert. Lieferung nur in die Schweiz. */
-const SHIPPING_FEE_CENTS = 600;
-const FREE_SHIPPING_THRESHOLD_CENTS = 10000;
-
-/** Schweizer MWST-Satz (Stand 2026). Preise sind inkl. MWST ausgezeichnet. */
-const VAT_RATE = 0.081;
 
 type Fields = {
   firstName: string;
@@ -64,13 +58,9 @@ export function CartDrawer() {
   const formatPrice = (cents: number) => formatChf(toChfCents(cents));
   const formatDisplay = formatChf;
 
-  const subtotalCents = toChfCents(totalCents);
-  const shippingCents =
-    subtotalCents >= FREE_SHIPPING_THRESHOLD_CENTS ? 0 : SHIPPING_FEE_CENTS;
-  const grandTotalCents = subtotalCents + shippingCents;
-  // MWST wird nur auf den Warenwert (Zwischensumme) berechnet, nicht auf den Versand.
-  const vatCents = Math.round(subtotalCents - subtotalCents / (1 + VAT_RATE));
-  const nettoCents = subtotalCents - vatCents;
+  const { subtotalCents, shippingCents, grandTotalCents, vatCents, nettoCents } = calcTotals(
+    toChfCents(totalCents),
+  );
 
   const [step, setStep] = useState<"cart" | "form">("cart");
   const [fields, setFields] = useState<Fields>(EMPTY);

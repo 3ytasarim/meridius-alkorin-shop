@@ -82,6 +82,19 @@ export const createOrder = createServerFn({ method: "POST" })
          ${JSON.stringify(items)}::jsonb, ${totalCents}, 'in_bearbeitung')
     `;
 
+    const { sendOrderConfirmation } = await import("./mail.server");
+    await sendOrderConfirmation({
+      orderNo,
+      firstName: data.firstName,
+      lastName: data.lastName,
+      email: data.email,
+      phone: data.phone,
+      street: data.street,
+      zip: data.zip,
+      city: data.city,
+      items,
+    });
+
     return { orderNo, totalCents };
   });
 
