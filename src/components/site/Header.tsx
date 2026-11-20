@@ -35,7 +35,7 @@ const NAV = [
 ] as const;
 
 const iconBtnBase =
-  "grid size-12 place-items-center rounded-md transition-colors hover:bg-soft-blue hover:text-navy";
+  "grid size-11 place-items-center rounded-md transition-colors hover:bg-soft-blue hover:text-navy sm:size-12";
 
 export function Header() {
   const cart = useCart();
@@ -63,15 +63,15 @@ export function Header() {
           transparentHero ? "bg-transparent" : "bg-[#415a78]"
         }`}
       >
-        <div className="container-alkorin flex h-20 items-center gap-6 lg:h-24">
+        <div className="container-alkorin flex h-20 items-center gap-3 sm:gap-6 lg:h-24">
           {/* Logo — left, bündig mit dem Container-Inhalt (z.B. "Bereit für morgen.") */}
-          <Link to="/" aria-label="Alkorin – zur Startseite" className="shrink-0">
+          <Link to="/" aria-label="Alkorin – zur Startseite" className="min-w-0 shrink">
             <img
               src="/Meridius_Logo_Dark_Header.png"
               alt="Meridius"
               width={2008}
               height={378}
-              className="h-12 w-auto lg:h-16"
+              className="h-8 w-auto max-w-full object-contain object-left sm:h-12 lg:h-16"
             />
           </Link>
 

@@ -22,7 +22,9 @@ export function LegalPage({
     <section className="section-y">
       <div className="container-alkorin max-w-3xl">
         <p className="eyebrow">Meridius</p>
-        <h1 className="mt-4 text-4xl font-extrabold text-navy lg:text-5xl">{title}</h1>
+        <h1 className="mt-4 text-[1.6rem] font-extrabold text-navy [overflow-wrap:anywhere] sm:text-4xl lg:text-5xl">
+          {title}
+        </h1>
         {subtitle ? (
           <p className="mt-3 text-sm font-semibold text-muted-foreground">{subtitle}</p>
         ) : null}
