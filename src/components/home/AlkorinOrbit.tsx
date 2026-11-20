@@ -133,13 +133,16 @@ export default function AlkorinOrbit({
 
   return (
     <div
+      // Die Beschriftungen ragen ~12 % der Box-Breite über den Ring hinaus; auf schmalen
+      // Bildschirmen wird die Box deshalb seitlich eingerückt, damit nichts abgeschnitten wird.
+      className="px-[14%] xl:px-0"
       style={{
         width: "100%",
         maxWidth,
         margin: "0 auto",
         display: "flex",
         justifyContent: "center",
-        padding: "5% 0",
+        paddingBlock: "5%",
       }}
     >
       <div ref={box} style={boxStyle}>

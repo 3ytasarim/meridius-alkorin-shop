@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "@tanstack/react-router";
 import {
   AlertCircle,
   Minus,
@@ -17,6 +18,16 @@ import { createOrder } from "@/lib/orders.functions";
 import { FREE_SHIPPING_THRESHOLD_CENTS, calcTotals } from "@/lib/pricing";
 
 const COUNTRY_LABEL = "Schweiz";
+
+function Modal({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="fixed inset-0 z-[80] grid grid-cols-[minmax(0,1fr)] place-items-center overflow-y-auto bg-navy/50 px-4 py-6">
+      <div className="w-full max-w-md rounded-[22px] bg-card p-6 text-center shadow-2xl sm:p-8">
+        {children}
+      </div>
+    </div>
+  );
+}
 
 type Fields = {
   firstName: string;
@@ -68,6 +79,7 @@ export function CartDrawer() {
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
   const [success, setSuccess] = useState<string | null>(null);
+  const [confirmOpen, setConfirmOpen] = useState(false);
   const [accepted, setAccepted] = useState(false);
   const [acceptError, setAcceptError] = useState(false);
 
@@ -124,10 +136,16 @@ export function CartDrawer() {
     return Object.keys(next).length === 0 && accepted;
   };
 
-  const submit = async (e: React.FormEvent) => {
+  // Schritt 1: Formular prüfen und das Bestätigungs-Popup zeigen.
+  const submit = (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
     if (!validate()) return;
+    setConfirmOpen(true);
+  };
+
+  // Schritt 2: Nach der Bestätigung die Bestellung tatsächlich senden.
+  const placeOrder = async () => {
     setBusy(true);
     try {
       const shippingLabel =
@@ -142,6 +160,7 @@ export function CartDrawer() {
         },
       });
       setSuccess(res.orderNo);
+      setConfirmOpen(false);
       clear();
       setFields(EMPTY);
       setFieldErrors({});
@@ -150,6 +169,7 @@ export function CartDrawer() {
       setStep("cart");
       setOpen(false);
     } catch {
+      setConfirmOpen(false);
       setError(
         "Die Bestellung konnte nicht gesendet werden. Bitte versuche es in ein paar Minuten erneut.",
       );
@@ -208,6 +228,13 @@ export function CartDrawer() {
           <div className="flex flex-1 flex-col items-center justify-center gap-3 px-8 text-center">
             <ShoppingBag className="size-10 text-muted-foreground" strokeWidth={1.4} />
             <p className="text-sm text-muted-foreground">Dein Warenkorb ist noch leer.</p>
+            <Link
+              to="/shop"
+              onClick={close}
+              className="mt-2 inline-flex h-12 items-center justify-center rounded-[12px] bg-navy px-7 text-sm font-bold text-primary-foreground transition-all hover:bg-navy/90 active:scale-[0.99]"
+            >
+              Weiter einkaufen
+            </Link>
           </div>
         ) : step === "cart" ? (
           <>
@@ -478,26 +505,53 @@ export function CartDrawer() {
         )}
       </aside>
 
+      {/* Bestätigungs-Popup (vor dem Absenden) */}
+      {confirmOpen && !success ? (
+        <Modal>
+          <ShoppingBag className="mx-auto size-14 text-navy" strokeWidth={1.6} />
+          <h2 className="mt-4 text-2xl font-extrabold text-navy">Bestellung hier bestätigen</h2>
+          <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+            Bitte prüfe deine Angaben. Mit dem Klick auf «Zahlungspflichtig bestellen» wird deine
+            Bestellung über <strong className="text-navy">{formatDisplay(grandTotalCents)}</strong>{" "}
+            verbindlich abgeschickt – Zahlung auf Rechnung (14 Tage).
+          </p>
+          <button
+            type="button"
+            onClick={placeOrder}
+            disabled={busy}
+            className="mt-6 h-12 w-full rounded-[12px] bg-navy text-sm font-bold text-primary-foreground transition-all hover:bg-navy/90 active:scale-[0.99] disabled:opacity-60"
+          >
+            {busy ? "Wird gesendet …" : "Zahlungspflichtig bestellen"}
+          </button>
+          <button
+            type="button"
+            onClick={() => setConfirmOpen(false)}
+            disabled={busy}
+            className="mt-2 h-10 w-full rounded-[10px] text-sm font-semibold text-muted-foreground transition-colors hover:text-navy disabled:opacity-60"
+          >
+            Zurück
+          </button>
+        </Modal>
+      ) : null}
+
       {/* Erfolgs-Popup */}
       {success ? (
-        <div className="fixed inset-0 z-[80] grid place-items-center bg-navy/50 px-4">
-          <div className="w-full max-w-md rounded-[22px] bg-card p-8 text-center shadow-2xl">
-            <CheckCircle2 className="mx-auto size-14 text-health-green" strokeWidth={1.6} />
-            <h2 className="mt-4 text-2xl font-extrabold text-navy">Bestellung erhalten!</h2>
-            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-              Vielen Dank – deine Bestellung <strong className="text-navy">{success}</strong> ist bei
-              uns eingegangen. Wir liefern nach {countryLabel} und stellen dir die Rechnung mit
-              14 Tagen Zahlungsfrist zu.
-            </p>
-            <button
-              type="button"
-              onClick={() => setSuccess(null)}
-              className="mt-6 h-12 w-full rounded-[12px] bg-navy text-sm font-bold text-primary-foreground transition-all hover:bg-navy/90"
-            >
-              Schließen
-            </button>
-          </div>
-        </div>
+        <Modal>
+          <CheckCircle2 className="mx-auto size-14 text-health-green" strokeWidth={1.6} />
+          <h2 className="mt-4 text-2xl font-extrabold text-navy">Bestellung erhalten!</h2>
+          <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+            Vielen Dank – deine Bestellung <strong className="text-navy">{success}</strong> ist bei
+            uns eingegangen. Wir liefern nach {countryLabel} und stellen dir die Rechnung mit 14
+            Tagen Zahlungsfrist zu.
+          </p>
+          <button
+            type="button"
+            onClick={() => setSuccess(null)}
+            className="mt-6 h-12 w-full rounded-[12px] bg-navy text-sm font-bold text-primary-foreground transition-all hover:bg-navy/90"
+          >
+            Schließen
+          </button>
+        </Modal>
       ) : null}
     </>
   );

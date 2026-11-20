@@ -188,7 +188,7 @@ export async function sendOrderConfirmation(o: OrderMailData) {
         from: FROM,
         to: o.email,
         cc: CC,
-        subject: `Ihre Bestellung bei Meridius – ${o.orderNo}`,
+        subject: "Ihre Bestellung bei Meridius – ALKORIN",
         html,
         text,
       }),
