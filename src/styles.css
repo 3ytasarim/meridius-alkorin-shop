@@ -244,6 +244,15 @@
   }
 }
 
+/* iOS-Safari malt Video-/Animations-/Filter-Ebenen der Seite über den (fixed) Warenkorb,
+   obwohl dessen z-index höher ist ("schwebende Icons"). Solange der Warenkorb offen ist,
+   werden diese Elemente ausgeblendet (CartDrawer setzt html.cart-open). */
+html.cart-open main video,
+html.cart-open main [class*="animate-["],
+html.cart-open [aria-label="Nach oben scrollen"] {
+  visibility: hidden !important;
+}
+
 @keyframes om-float {
   0%,
   100% {

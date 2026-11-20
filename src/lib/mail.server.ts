@@ -168,6 +168,7 @@ export async function sendOrderConfirmation(o: OrderMailData) {
     console.error("[mail] SMTP_USER/SMTP_PASS fehlen – Bestätigung für", o.orderNo, "nicht gesendet");
     return;
   }
+  let timer: ReturnType<typeof setTimeout> | undefined;
   try {
     const { default: nodemailer } = await import("nodemailer");
     const port = Number(process.env["SMTP_PORT"] ?? 465);
@@ -176,17 +177,28 @@ export async function sendOrderConfirmation(o: OrderMailData) {
       port,
       secure: port === 465,
       auth: { user, pass },
+      connectionTimeout: 5000,
+      greetingTimeout: 5000,
+      socketTimeout: 10000,
     });
     const { html, text } = buildOrderMail(o);
-    await transporter.sendMail({
-      from: FROM,
-      to: o.email,
-      cc: CC,
-      subject: `Ihre Bestellung bei Meridius – ${o.orderNo}`,
-      html,
-      text,
-    });
+    // Harte Obergrenze: Die Bestellung darf nie an einem hängenden Mailserver warten.
+    await Promise.race([
+      transporter.sendMail({
+        from: FROM,
+        to: o.email,
+        cc: CC,
+        subject: `Ihre Bestellung bei Meridius – ${o.orderNo}`,
+        html,
+        text,
+      }),
+      new Promise<never>((_, reject) => {
+        timer = setTimeout(() => reject(new Error("SMTP-Timeout nach 8 s")), 8000);
+      }),
+    ]);
   } catch (err) {
     console.error("[mail] Versand fehlgeschlagen", err);
+  } finally {
+    clearTimeout(timer);
   }
 }

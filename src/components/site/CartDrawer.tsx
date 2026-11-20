@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   AlertCircle,
   Minus,
@@ -70,6 +70,12 @@ export function CartDrawer() {
   const [success, setSuccess] = useState<string | null>(null);
   const [accepted, setAccepted] = useState(false);
   const [acceptError, setAcceptError] = useState(false);
+
+  useEffect(() => {
+    const root = document.documentElement;
+    root.classList.toggle("cart-open", open);
+    return () => root.classList.remove("cart-open");
+  }, [open]);
 
   const set = (k: keyof Fields) => (e: React.ChangeEvent<HTMLInputElement>) => {
     setFields((f) => ({ ...f, [k]: e.target.value }));
