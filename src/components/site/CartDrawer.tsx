@@ -71,10 +71,34 @@ export function CartDrawer() {
   const [accepted, setAccepted] = useState(false);
   const [acceptError, setAcceptError] = useState(false);
 
+  // Sepet açıkken sayfa kaydırmasını kilitle (iOS Safari'de body'yi fixed yapmak gerekir)
+  // ve Safari'de üstte görünen sayfa öğelerini gizle (bkz. styles.css .cart-open).
   useEffect(() => {
+    if (!open) return;
     const root = document.documentElement;
-    root.classList.toggle("cart-open", open);
-    return () => root.classList.remove("cart-open");
+    const body = document.body;
+    const scrollY = window.scrollY;
+    const scrollbar = window.innerWidth - root.clientWidth;
+    const prev = {
+      position: body.style.position,
+      top: body.style.top,
+      left: body.style.left,
+      right: body.style.right,
+      width: body.style.width,
+      paddingRight: body.style.paddingRight,
+    };
+    root.classList.add("cart-open");
+    body.style.position = "fixed";
+    body.style.top = `-${scrollY}px`;
+    body.style.left = "0";
+    body.style.right = "0";
+    body.style.width = "100%";
+    if (scrollbar > 0) body.style.paddingRight = `${scrollbar}px`;
+    return () => {
+      root.classList.remove("cart-open");
+      Object.assign(body.style, prev);
+      window.scrollTo({ top: scrollY, behavior: "instant" });
+    };
   }, [open]);
 
   const set = (k: keyof Fields) => (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -161,7 +185,7 @@ export function CartDrawer() {
       />
       <aside
         aria-label="Warenkorb"
-        className={`fixed right-0 top-0 z-[71] flex h-dvh w-full max-w-[440px] flex-col bg-card shadow-2xl transition-transform duration-300 ease-out ${
+        className={`fixed inset-y-0 right-0 z-[71] flex w-full max-w-[440px] flex-col bg-card shadow-2xl transition-transform duration-300 ease-out ${
           open ? "translate-x-0" : "translate-x-full"
         }`}
       >
@@ -187,7 +211,7 @@ export function CartDrawer() {
           </div>
         ) : step === "cart" ? (
           <>
-            <ul className="flex-1 space-y-4 overflow-y-auto px-5 py-5">
+            <ul className="flex-1 space-y-4 overflow-y-auto overscroll-contain px-5 py-5">
               {items.map((i) => (
                 <li key={i.slug} className="flex gap-4 rounded-[16px] border border-border p-3">
                   <img
@@ -283,7 +307,7 @@ export function CartDrawer() {
           </>
         ) : (
           <form onSubmit={submit} noValidate className="flex flex-1 flex-col overflow-hidden">
-            <div className="flex-1 space-y-3 overflow-y-auto px-5 py-5">
+            <div className="flex-1 space-y-3 overflow-y-auto overscroll-contain px-5 py-5">
               <div className="grid grid-cols-2 gap-3">
                 <div>
                   <input
